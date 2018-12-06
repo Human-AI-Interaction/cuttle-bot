@@ -15,3 +15,26 @@
 	border: 2px solid black;	
 	bottom: 10%;
 }
+
+#deck {
+	position: absolute;
+	display: inline-block;
+	height: 20%;
+	top: 28%;
+	margin-left: 2%;
+}
+
+#scrap {
+	position: absolute;
+	display: inline-block;
+	height: 20%;
+	top: 49%;
+	margin-left: 2%;	
+}
+
+#undo {
+    position: absolute;
+    display: inline-block;
+    height: 8%;
+    top: /*-1*/%;
+}

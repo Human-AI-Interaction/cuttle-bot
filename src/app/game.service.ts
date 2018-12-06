@@ -7,8 +7,23 @@ import { game } from './mock_game';
 })
 
 export class GameService {
-	game: Game;
+	history: Array<Game>;
+
+	// Current game is the last in the history
+	get game() {
+		return this.history[this.history.length - 1];
+	}
+
+	update(game: Game) {
+		this.history.push(game);
+	} 
+
+	undo() {
+		this.history.pop();
+	}
+
 	constructor() {
-		this.game = game;
+		this.history = new Array<Game>();
+		this.history.push(game);
 	}
 }

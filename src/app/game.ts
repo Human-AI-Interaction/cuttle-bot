@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 import { Card } from './card';
 import { Player } from './player';
 
@@ -5,6 +6,20 @@ export class Game {
 	players: Player[];
 	deck: Card[];
 	turn: number;
+
+	////////////
+	// Getters//
+	////////////
+	get bot() {
+		return this.players[0];
+	}
+	get player() {
+		return this.players[1];
+	}
+
+	/////////////
+	// Methods //
+	/////////////
 	// Shuffles deck
 	shuffle() {
 		for (let i=this.deck.length - 1; i> 0; i--) {
@@ -13,16 +28,20 @@ export class Game {
 		}
 	}
 
+	copy() {
+		return cloneDeep(this);
+	}
+	
 	constructor() {
 		this.deck = new Array<Card>();
 		this.players = new Array<Player>();
 		this.players.push(new Player(true)); //Bot goes first
 		this.players.push(new Player(false)); //Human player second
-		this.turn = 0;
+		this.turn = 1;
 
 		// Create deck
 		for (let suit=0; suit<4; suit++) {
-			for (let rank=0; rank<14; rank++) {
+			for (let rank=1; rank<14; rank++) {
 				this.deck.push(new Card(suit, rank));
 			}
 		}
