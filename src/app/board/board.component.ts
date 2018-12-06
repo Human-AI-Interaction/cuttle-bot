@@ -31,7 +31,6 @@ export class BoardComponent implements OnInit {
 	}
 
 	undo() {
-		console.log("undoing");
 		this.gameService.undo();
 		this.getGame();
 	}

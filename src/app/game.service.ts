@@ -19,7 +19,11 @@ export class GameService {
 	} 
 
 	undo() {
-		this.history.pop();
+		if (this.history.length > 1) {
+			this.history.pop();
+		} else {
+			alert("We are back at the beginning of the game! Try making a move");
+		}
 	}
 
 	constructor() {
