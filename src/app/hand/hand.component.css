@@ -1,0 +1,11 @@
+div {
+	position: relative;
+	display: inline-block;
+	height: 100%;
+	margin-left: 2%;
+}
+img {
+	position: relative;
+	display: inline-block;
+	height: 100%;
+}

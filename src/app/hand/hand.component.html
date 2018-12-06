@@ -1,0 +1,4 @@
+<div *ngFor="let card of player.hand">
+	<img *ngIf="player.isBot" src="assets/cardBack.png" class="card">
+	<img *ngIf="!player.isBot" src="assets/cards/{{card.img}}" class="card">
+</div>
