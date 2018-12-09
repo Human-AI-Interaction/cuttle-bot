@@ -1,5 +1,12 @@
 <img id="undo" src="assets/back-arrow.png" (click)="undo()">
 <app-hand id="botHand" [player]="game.players[0]"></app-hand>
+
 <img src="assets/deck.jpg" id="deck" (click)="draw()">
 <img src="assets/scrap.jpg" id="scrap">
+
+<div id="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
+	<div id="yourPoints">
+		<img *ngFor="let card of game.player.points" src="assets/cards/{{card.img}}" class="yourPointCard">
+	</div>
+</div>
 <app-hand id="yourHand" [player]="game.players[1]"></app-hand>

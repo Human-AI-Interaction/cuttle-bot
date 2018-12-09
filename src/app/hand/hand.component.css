@@ -9,3 +9,7 @@ img {
 	display: inline-block;
 	height: 100%;
 }
+
+.selected {
+	border: 2px solid green;
+}

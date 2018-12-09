@@ -9,6 +9,11 @@ import { GameService } from '../game.service';
 })
 export class BoardComponent implements OnInit {
 	game: Game;
+
+	get gs() {
+		return this.gameService;
+	}
+
 	getGame() {
 		this.game = this.gameService.game;
 	}
@@ -18,7 +23,6 @@ export class BoardComponent implements OnInit {
 		if (this.game.turn % 2 == 1) {
 			// Check if you're under the hand limit
 			if (this.game.player.hand.length <= 8) {
-				// let gameCopy = JSON.parse(JSON.stringify(this.game)); // copy game
 				let gameCopy = this.game.copy();
 				gameCopy.players[1].hand.push(gameCopy.deck.shift()); // add card to hand
 				gameCopy.turn++; // increment turn
@@ -26,6 +30,33 @@ export class BoardComponent implements OnInit {
 				// Add change to history and update game
 				this.gameService.update(gameCopy);
 				this.getGame();
+				this.gameService.selected = null;
+				this.gameService.selIndex = null;
+			}
+		}
+	}
+
+	playToField() {
+		if (this.gameService.selected) {		
+			if (this.game.turn % 2 == 1)  {
+				// Play for points
+				if (this.gameService.selected.rank <= 10) {
+					let gameCopy = this.game.copy();
+
+					// Move card to points
+					gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+
+					// Update game
+					this.gameService.update(gameCopy);
+					this.getGame();
+					// Delete selection
+					this.gameService.selected = null;
+					this.gameService.selIndex = null;
+
+				// Play face card
+				} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
+					
+				}
 			}
 		}
 	}
@@ -34,6 +65,8 @@ export class BoardComponent implements OnInit {
 		this.gameService.undo();
 		this.getGame();
 	}
+
+
 
 	constructor(private gameService: GameService) {}
 
