@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Game } from './game';
 import { Card } from './card';
+import { Bot } from './bot';
 import { game } from './mock_game'; 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { game } from './mock_game';
 
 export class GameService {
 	history: Array<Game>;
-
+	botBrain: Bot;
 	selected: Card;
 	selIndex: number;
 
@@ -76,5 +77,6 @@ export class GameService {
 		this.history.push(game);
 		this.selIndex = null;
 		this.selected = null;
+		this.botBrain = new Bot();
 	}
 }

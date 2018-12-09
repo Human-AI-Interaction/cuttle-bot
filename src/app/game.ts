@@ -5,6 +5,7 @@ import { Player } from './player';
 export class Game {
 	players: Player[];
 	deck: Card[];
+	scrap: Card[];
 	turn: number;
 
 	////////////
