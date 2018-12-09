@@ -50,8 +50,13 @@
 
 #yourPoints {
 	/*height: */
+	
 }
 
+.yourPointCard {
+	height: 5%;
+	width: 10%;
+}
 
 .legalMove {
 	background-color: rgb(91, 194, 69);
