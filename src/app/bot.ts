@@ -22,7 +22,7 @@ export class Bot {
                 // Playing the card as points
                 var play_points_game_copy = cloneDeep(game);
                 play_points_game_copy.bot.points.push(play_points_game_copy.bot.hand.splice(index, 1)[0]);
-                possibleMoves.push(new Move("points", play_points_game_copy));
+                possibleMoves.push(new Move("points", play_points_game_copy, card, index));
 
                 // Check possible scuttles
                 game.player.points.forEach((target, targetIndex) => {
@@ -30,7 +30,7 @@ export class Bot {
                         var scuttle_copy = cloneDeep(game);
                         scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
                         scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
-                        possibleMoves.push(new Move("scuttle", scuttle_copy));
+                        possibleMoves.push(new Move("scuttle", scuttle_copy, card, index , target, targetIndex));
                     }
                 });
             } 
@@ -38,7 +38,7 @@ export class Bot {
             else if (card.rank == 12 || card.rank == 13) {
                 var play_face_copy = cloneDeep(game);
                 play_face_copy.bot.faceCards.push(play_face_copy.bot.hand.splice(index, 1)[0]);
-                possibleMoves.push(new Move("faceCard", play_face_copy));
+                possibleMoves.push(new Move("faceCard", play_face_copy, card, index));
             }
             // Jacks
             else {
@@ -46,8 +46,6 @@ export class Bot {
             }
         });
         let gameAfterBotMove = this.chooseMove(possibleMoves, game);
-        console.log("\n\nGame after bot move in decideLegalMoves:");
-        console.log(gameAfterBotMove);
         return gameAfterBotMove;
     }
     // evaluating score of one game
@@ -95,6 +93,33 @@ export class Bot {
         console.log(best_move);
 
         // let gameAfterBotMove = this.makeMove(best_move, game);
+
+        // Alert player of bot's move
+        const moveName = best_move.name;
+        let announcement = "";
+
+        console.log("\n\nMove name: ");
+        console.log(moveName);
+        switch (moveName) {
+            case "draw":
+                announcement = "Cuttle Bot Draws."
+                break;
+            case "points":
+                announcement = `Cuttle Bot plays the ${best_move.card.name} for points`;
+                break;
+            case "faceCard":
+                announcement = `Cuttle Bot plays the ${best_move.card.name}`;
+                break;
+            case "scuttle":
+                announcement = `Cuttle Bot scuttles your ${best_move.target.name} with its ${best_move.card.name}`;
+                break;
+            default:
+                // code...
+                break;
+        }
+
+        alert(announcement);
+
         let gameAfterBotMove = best_move.game;
         return gameAfterBotMove;
 
