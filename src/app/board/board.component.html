@@ -5,7 +5,10 @@
 <img src="assets/scrap.jpg" id="scrap">
 
 <div id="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
-	<div id="yourPoints">
+	<div id="botPoints" class="points">
+		<img *ngFor="let card of game.bot.points" src="assets/cards/{{card.img}}" class="yourPointCard">
+	</div>
+	<div id="yourPoints" class="points">
 		<img *ngFor="let card of game.player.points" src="assets/cards/{{card.img}}" class="yourPointCard">
 	</div>
 </div>

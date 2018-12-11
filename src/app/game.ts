@@ -6,7 +6,7 @@ export class Game {
 	players: Player[];
 	deck: Card[];
 	scrap: Card[];
-	turn: number;
+	// turn: number;
 
 	////////////
 	// Getters//
@@ -38,7 +38,6 @@ export class Game {
 		this.players = new Array<Player>();
 		this.players.push(new Player(true)); //Bot goes first
 		this.players.push(new Player(false)); //Human player second
-		this.turn = 1;
 
 		// Create deck
 		for (let suit=0; suit<4; suit++) {

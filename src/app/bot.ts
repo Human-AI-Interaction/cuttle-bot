@@ -8,11 +8,41 @@ export class Bot {
     decideLegalMoves(game: Game) {
         let possibleMoves = [];
 
-        if(game.bot.hand.length < 8 && game.deck.length > 0){
+        // Draw
+        if (game.bot.hand.length < 8 && game.deck.length > 0){
             let game_copy = cloneDeep(game);
             game_copy.bot.hand.push(game_copy.deck.shift());
             possibleMoves.push(new Move("draw", game_copy));
         }
+
+        // Play cards to field
+        game.bot.hand.forEach((card, index) => {
+            // Number cards
+            if (card.rank <= 10) {
+                // Playing the card as points
+                var play_points_game_copy = cloneDeep(game);
+                play_points_game_copy.bot.points.push(play_points_game_copy.bot.hand.splice(index, 1)[0]);
+                possibleMoves.push(new Move("points", play_points_game_copy));
+
+                // Check possible scuttles
+                game.player.points.forEach((target, targetIndex) => {
+                    if (card.rank > target.rank || (card.rank == target.rank && card.suit > target.suit)) {
+                        // var scuttle_copy = cloneDeep(game);
+                        // scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
+                        // scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
+                        // possibleMoves.push(scuttle_copy);
+                    }
+                });
+            } 
+            // Kings and Queens
+            else if (card.rank == 12 || card.rank == 13) {
+
+            }
+            // Jacks
+            else {
+
+            }
+        });
         let gameAfterBotMove = this.chooseMove(possibleMoves, game);
         return gameAfterBotMove;
     }
@@ -84,7 +114,6 @@ export class Bot {
                 break;
         }
 
-        game.turn ++;
     }
 
     constructor() {
