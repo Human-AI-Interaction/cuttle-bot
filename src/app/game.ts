@@ -49,8 +49,8 @@ export class Game {
 		this.shuffle(); // Shuffle deck
 
 		// Deal
-		this.players[1].hand.push(this.deck.shift()); //Extra card to player
-		// Player gets 6, Bot gets 5 and goes first
+		this.bot.hand.push(this.deck.shift()); //Extra card to player
+		// Player gets 5 and goes first, Bot gets 6
 		for (let i=0; i<5; i++) {
 			this.players[0].hand.push(this.deck.shift());
 			this.players[1].hand.push(this.deck.shift());

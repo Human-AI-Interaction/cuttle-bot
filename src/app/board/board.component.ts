@@ -26,7 +26,7 @@ export class BoardComponent implements OnInit {
 				let gameCopy = this.game.copy();
 				gameCopy.players[1].hand.push(gameCopy.deck.shift()); // add card to hand
 				gameCopy.turn++; // increment turn
-				this.gameService.botBrain.decideLegalMoves(gameCopy);
+				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 				// Add change to history and update game
 				this.gameService.update(gameCopy);
 				this.getGame();
@@ -46,14 +46,14 @@ export class BoardComponent implements OnInit {
 					// Move card to points
 					gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 					gameCopy.turn++;
-					this.gameService.botBrain.decideLegalMoves(gameCopy);
+					gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 					// Update game
 					this.gameService.update(gameCopy);
 					this.getGame();
 					// Delete selection
 					this.gameService.selected = null;
 					this.gameService.selIndex = null;
-					this.gameService.botBrain.decideLegalMoves(this.gameService.game);
+					// this.gameService.botBrain.decideLegalMoves(this.gameService.game);
 				// Play face card
 				} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
 					

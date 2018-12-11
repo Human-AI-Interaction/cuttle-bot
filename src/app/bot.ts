@@ -13,8 +13,8 @@ export class Bot {
             game_copy.bot.hand.push(game_copy.deck.shift());
             possibleMoves.push(new Move("draw", game_copy));
         }
-        this.chooseMove(possibleMoves, game);
-        return game;
+        let gameAfterBotMove = this.chooseMove(possibleMoves, game);
+        return gameAfterBotMove;
     }
     // evaluating games
     evaluateGame(game: Game) {
@@ -39,6 +39,8 @@ export class Bot {
     }
 
     chooseMove(moves: Array<Move>, game: Game) {
+        console.log("choosing move from list");
+        console.log(moves);
         let highest_score = null;
         let high_index = null;
 
@@ -53,7 +55,12 @@ export class Bot {
 
         let best_move = moves[high_index];
 
-        this.makeMove(best_move, game);
+        console.log("found best move:");
+        console.log(best_move);
+
+        // this.makeMove(best_move, game);
+        let gameAfterBotMove = best_move.game;
+        return gameAfterBotMove;
 
     }
 

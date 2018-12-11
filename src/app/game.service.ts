@@ -17,7 +17,6 @@ export class GameService {
 	get legalMoves() {
 		let moves = [];
 		if (this.selected) {
-			console.log(this.selected);
 			switch (this.selected.rank) {
 				case 1:
 				case 3:
