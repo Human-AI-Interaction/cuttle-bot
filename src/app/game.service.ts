@@ -60,7 +60,11 @@ export class GameService {
 	}
 
 	update(game: Game) {
+		console.log("Updating game in game service. Before update:");
+		console.log(game);
 		this.history.push(game);
+		console.log("after update:");
+		console.log(this.game);
 	} 
 
 	undo() {

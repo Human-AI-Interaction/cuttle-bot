@@ -22,6 +22,12 @@ export class Move {
 
             resulting_games.push(game_copy);
         }
+        // Assume player plays the ten of spades to evaluate player's offense
+        let player_plays_ten = cloneDeep(game);
+        player_plays_ten.player.points.push(new Card(3, 10));
+        player_plays_ten.player.hand.shift();
+        resulting_games.push(player_plays_ten);
+
         console.log(resulting_games);
         return resulting_games;
     }

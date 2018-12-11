@@ -17,6 +17,12 @@ export class Game {
 	get player() {
 		return this.players[1];
 	}
+	get botWins() {
+		return this.bot.isWinner;
+	}
+	get playerWins() {
+		return this.player.isWinner;
+	}
 
 	/////////////
 	// Methods //
@@ -35,6 +41,7 @@ export class Game {
 	
 	constructor() {
 		this.deck = new Array<Card>();
+		this.scrap = new Array<Card>();
 		this.players = new Array<Player>();
 		this.players.push(new Player(true)); //Bot goes first
 		this.players.push(new Player(false)); //Human player second

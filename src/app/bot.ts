@@ -27,10 +27,10 @@ export class Bot {
                 // Check possible scuttles
                 game.player.points.forEach((target, targetIndex) => {
                     if (card.rank > target.rank || (card.rank == target.rank && card.suit > target.suit)) {
-                        // var scuttle_copy = cloneDeep(game);
-                        // scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
-                        // scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
-                        // possibleMoves.push(scuttle_copy);
+                        var scuttle_copy = cloneDeep(game);
+                        scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
+                        scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
+                        possibleMoves.push(new Move("scuttle", scuttle_copy));
                     }
                 });
             } 
@@ -44,18 +44,21 @@ export class Bot {
             }
         });
         let gameAfterBotMove = this.chooseMove(possibleMoves, game);
+        console.log("\n\nGame after bot move in decideLegalMoves:");
+        console.log(gameAfterBotMove);
         return gameAfterBotMove;
     }
-    // evaluating games
+    // evaluating score of one game
     evaluateGame(game: Game) {
         let score = game.bot.hand.length + game.bot.points.length + game.bot.faceCards.length
             - (game.player.hand.length + game.player.points.length + game.player.faceCards.length);
+        if (game.playerWins) {score = -100; console.log("PLAYER COULD WIN!!!!")}
+        if (game.botWins) score = 100;
         return score;
     }
 
-    // 
     evaluateMove(move: Move) {
-        console.log("Evaluating move");
+        console.log("\nEvaluating move");
         console.log(move);
         let score = null;
         move.results.forEach(game => {
@@ -65,6 +68,7 @@ export class Bot {
                 score = game_score;
             }
         });
+        console.log(score);
         return score;
     }
 
@@ -88,7 +92,7 @@ export class Bot {
         console.log("found best move:");
         console.log(best_move);
 
-        // this.makeMove(best_move, game);
+        // let gameAfterBotMove = this.makeMove(best_move, game);
         let gameAfterBotMove = best_move.game;
         return gameAfterBotMove;
 
@@ -113,7 +117,7 @@ export class Bot {
                 game.bot.faceCards.push(game.bot.hand.splice(move.index, 1)[0])
                 break;
         }
-
+        return game;
     }
 
     constructor() {
