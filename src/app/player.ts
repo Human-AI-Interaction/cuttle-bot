@@ -20,6 +20,13 @@ export class Player {
 		});
 		return res;
 	}
+	get pointTotal() {
+		let res = 0;
+		this.points.forEach(card => {
+			res += card.rank;
+		});
+		return res;
+	}
 	get isWinner() {
 		let res = false;
 		let score = this.score;

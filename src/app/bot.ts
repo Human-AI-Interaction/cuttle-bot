@@ -50,8 +50,8 @@ export class Bot {
     }
     // evaluating score of one game
     evaluateGame(game: Game) {
-        let score = game.bot.hand.length + game.bot.points.length + game.bot.faceCards.length
-            - (game.player.hand.length + game.player.points.length + game.player.faceCards.length);
+        let score = game.bot.hand.length + game.bot.pointTotal % 10  + game.bot.pointTotal/10 + game.bot.faceCards.length
+            - (game.player.hand.length + game.player.pointTotal % 10 + game.player.pointTotal/10 + game.player.faceCards.length);
         if (game.playerWins) {score = -100; console.log("PLAYER COULD WIN!!!!")}
         if (game.botWins) score = 100;
         return score;
