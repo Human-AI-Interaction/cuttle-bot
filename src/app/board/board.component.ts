@@ -36,30 +36,29 @@ export class BoardComponent implements OnInit {
 		if (this.gameService.selected) {		
 			// Play for points
 			if (this.gameService.selected.rank <= 10) {
-				let gameCopy = this.game.copy();
+				var gameCopy = this.game.copy();
 
 				// Move card to points
 				gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-				console.log("Game after bot move in playToField (board component):");
-				console.log(gameCopy);
-				// Update game
-				this.gameService.update(gameCopy);
-				this.getGame();
 
-
-				console.log("New game in board controller after updating gameService:");
-				console.log(this.game);
-				console.log("\n\n");
-
-				// Delete selection
-				this.gameService.selected = null;
-				this.gameService.selIndex = null;
 				// this.gameService.botBrain.decideLegalMoves(this.gameService.game);
 			// Play face card
 			} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
+				var gameCopy = this.game.copy();
+				gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+
 				
 			}
+			
+			// Update game
+			this.gameService.update(gameCopy);
+			this.getGame();
+
+			// Delete selection
+			this.gameService.selected = null;
+			this.gameService.selIndex = null;
 		}
 	}
 

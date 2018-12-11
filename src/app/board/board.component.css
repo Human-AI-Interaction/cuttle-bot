@@ -49,10 +49,16 @@
 }
 
 
-.points {
+.field {
 	display: block;
 	position: relative;
 	height: 50%;
+}
+.fieldArea {
+	display: inline-block;
+	position: relative;
+	height: 100%;
+	width: 50%;
 	
 }
 

@@ -36,7 +36,9 @@ export class Bot {
             } 
             // Kings and Queens
             else if (card.rank == 12 || card.rank == 13) {
-
+                var play_face_copy = cloneDeep(game);
+                play_face_copy.bot.faceCards.push(play_face_copy.bot.hand.splice(index, 1)[0]);
+                possibleMoves.push(new Move("faceCard", play_face_copy));
             }
             // Jacks
             else {
