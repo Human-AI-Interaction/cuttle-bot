@@ -20,6 +20,13 @@ export class Player {
 		});
 		return res;
 	}
+	get numQueens() {
+		let res = 0;
+		this.faceCards.forEach(card => {
+			if (card.rank == 12) res++;
+		});
+		return res;
+	}
 	get pointTotal() {
 		let res = 0;
 		this.points.forEach(card => {

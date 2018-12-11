@@ -4,16 +4,16 @@
 <img src="assets/deck.jpg" id="deck" (click)="draw()">
 <img src="assets/scrap.jpg" id="scrap">
 
-<div id="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
+<div id="field">
 	<div id="botField" class="field">
 		<div id="botPoints" class="fieldArea">
-			<img *ngFor="let card of game.bot.points" src="assets/cards/{{card.img}}" class="yourPointCard">
+			<img *ngFor="let card of game.bot.points index as index" src="assets/cards/{{card.img}}" class="yourPointCard" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}" (click)="targetPoint(card, index)">
 		</div>
 		<div id="botFaceCards" class="fieldArea">
-			<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="yourPointCard">
+			<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="yourPointCard" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}">
 		</div>
 	</div>
-	<div id="yourField" class="field">
+	<div id="yourField" class="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
 		<div id="yourPoints" class="fieldArea">
 			<img *ngFor="let card of game.player.points" src="assets/cards/{{card.img}}" class="yourPointCard">
 		</div>

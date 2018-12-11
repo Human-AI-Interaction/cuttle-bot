@@ -52,14 +52,12 @@ export class Bot {
     evaluateGame(game: Game) {
         let score = game.bot.hand.length + game.bot.pointTotal % 10  + game.bot.pointTotal/10 + game.bot.faceCards.length
             - (game.player.hand.length + game.player.pointTotal % 10 + game.player.pointTotal/10 + game.player.faceCards.length);
-        if (game.playerWins) {score = -100; console.log("PLAYER COULD WIN!!!!")}
+        if (game.playerWins) score = -100
         if (game.botWins) score = 100;
         return score;
     }
 
     evaluateMove(move: Move) {
-        console.log("\nEvaluating move");
-        console.log(move);
         let score = null;
         move.results.forEach(game => {
             let game_score = this.evaluateGame(game);
@@ -68,13 +66,10 @@ export class Bot {
                 score = game_score;
             }
         });
-        console.log(score);
         return score;
     }
 
     chooseMove(moves: Array<Move>, game: Game) {
-        console.log("choosing move from list");
-        console.log(moves);
         let highest_score = null;
         let high_index = null;
 
@@ -89,8 +84,6 @@ export class Bot {
 
         let best_move = moves[high_index];
 
-        console.log("found best move:");
-        console.log(best_move);
 
         // let gameAfterBotMove = this.makeMove(best_move, game);
 
@@ -98,8 +91,6 @@ export class Bot {
         const moveName = best_move.name;
         let announcement = "";
 
-        console.log("\n\nMove name: ");
-        console.log(moveName);
         switch (moveName) {
             case "draw":
                 announcement = "Cuttle Bot Draws."

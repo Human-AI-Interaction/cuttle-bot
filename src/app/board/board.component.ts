@@ -62,6 +62,26 @@ export class BoardComponent implements OnInit {
 		}
 	}
 
+	targetPoint(card, index) {
+		// Scuttle
+		if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
+			var gameCopy = this.game.copy();
+			gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
+			gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+
+			// Update game
+			this.gameService.update(gameCopy);
+			this.getGame();
+
+			// Delete selection
+			this.gameService.selected = null;
+			this.gameService.selIndex = null;
+
+		}
+	}
+
 	undo() {
 		this.gameService.undo();
 		this.getGame();

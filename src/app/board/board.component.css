@@ -71,3 +71,6 @@
 .legalMove {
 	background-color: rgb(91, 194, 69);
 }
+.validTarget {
+	border: 2px solid rgb(91, 194, 69);
+}

@@ -13,10 +13,13 @@ export class GameService {
 	botBrain: Bot;
 	selected: Card;
 	selIndex: number;
+	validTargets: Card[];
 
 	get legalMoves() {
 		let moves = [];
+		this.validTargets = [];
 		if (this.selected) {
+			console.log("finding legal moves");
 			switch (this.selected.rank) {
 				case 1:
 				case 3:
@@ -28,23 +31,56 @@ export class GameService {
 					moves.push("scrap");
 					// Determine legal scuttles
 					this.game.bot.points.forEach(card => {
-						// if (card.rank < this.gameService.selected.rank || (card.rank == this.gameService.selected.rank && card.suit <= this.gameService.selected.suit) ) {
-						// 	// Add point to list of scuttles
-						// }
+						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
+							console.log(`Found legal scuttle: ${card.name} with ${this.selected.name}`);
+							// Add point to list of scuttles
+							this.validTargets.push(card);
+						}
 					});
+					console.log("Valid targets:" );
+					console.log(this.validTargets);
 					break;
 
 				case 2:
 				case 9:
+					// Determine legal scuttles
+					this.game.bot.points.forEach(card => {
+						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
+							console.log(`Found legal scuttle: ${card.name} with ${this.selected.name}`);
+							// Add point to list of scuttles
+							this.validTargets.push(card);
+						}
+					});
 					moves.push("field");
 					break;
 				case 8:
+					// Determine legal scuttles
+					this.game.bot.points.forEach(card => {
+						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
+							console.log(`Found legal scuttle: ${card.name} with ${this.selected.name}`);
+							// Add point to list of scuttles
+							this.validTargets.push(card);
+						}
+					});
 					moves.push("field");
 					break;
 				case 10:
+					// Determine legal scuttles
+					this.game.bot.points.forEach(card => {
+						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
+							console.log(`Found legal scuttle: ${card.name} with ${this.selected.name}`);
+							// Add point to list of scuttles
+							this.validTargets.push(card);
+						}
+					});
 					moves.push("field");
 					break;
 				case 11:
+					if (this.game.bot.numQueens < 1) {
+						this.game.bot.points.forEach(card => {
+							this.validTargets.push(card);
+						});
+					} 
 					break;
 				case 12:
 				case 13:	
@@ -60,11 +96,7 @@ export class GameService {
 	}
 
 	update(game: Game) {
-		console.log("Updating game in game service. Before update:");
-		console.log(game);
 		this.history.push(game);
-		console.log("after update:");
-		console.log(this.game);
 	} 
 
 	undo() {
@@ -77,6 +109,7 @@ export class GameService {
 
 	constructor() {
 		this.history = new Array<Game>();
+		this.validTargets = new Array<Card>();
 		this.history.push(game);
 		this.selIndex = null;
 		this.selected = null;

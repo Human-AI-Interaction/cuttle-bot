@@ -13,7 +13,6 @@ export class Move {
     results: Array<Game>;
 
     findResults(game: Game) {
-        console.log("finding resulting games after possible counter-moves");
         let resulting_games = [];
         if(game.player.hand.length < 8 && game.deck.length > 0){
             let game_copy = cloneDeep(game);
@@ -28,14 +27,10 @@ export class Move {
         player_plays_ten.player.hand.shift();
         resulting_games.push(player_plays_ten);
 
-        console.log(resulting_games);
         return resulting_games;
     }
 
     constructor(name, game, card?, index?, target?, target_index?) {
-        console.log("Making new move with resulting game:");
-        console.log(game);
-
         this.name = name;
         this.game = game;
         this.card = card;
