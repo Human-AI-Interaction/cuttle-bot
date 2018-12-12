@@ -155,21 +155,50 @@ export class Bot {
 		let res = null;
 		// Only consider suggesting move if player didn't win
 		if (!gameAfterPlayerMove.player.isWinner) {
+			let betterMovePriority = 0;
+			// Check for better defensive moves if player lost
+			if (gameAfterPlayerMove.bot.isWinner) {
+				// Assume player didn't have a better move unless we find a way to stop the bot
+				res = "Dang, you lost! Nice try. There was actually nothing you could have done better on that last turn. Try rewinding a few turns back if you want to see how the game could have gone, or just refresh the page to start over.";
+				initialGame.player.hand.forEach(card => {
+					// Check for potential scuttles and jack steals
+					initialGame.bot.points.forEach(target => {
+						if ((card.rank <= 10 && card.rank > target.rank || (card.rank == target.rank && card.suit > target.suit)) && betterMovePriority == 0) {
+							res = "Dang, you lost! You might have been able to stop the bot if you scuttled last turn. Try rewinding and playing that turn over!";
+							betterMovePriority = 1;
+						}
+						else if (card.rank == 11 && initialGame.bot.numQueens == 0 && betterMovePriority <= 1) {
+							res = "Dang, you lost! You might have been able to stop the bot if you stole its points with a jack last turn. Try rewinding and playing that turn over!";
+							betterMovePriority = 2;
+						}
+					});
+				});
+			}
+
+			// Check for better offensive moves
 			initialGame.player.hand.forEach((card, index) => {
 				if (card.rank <= 10) {
-					if (initialGame.player.remainingPointsNeededToWin < card.rank) {
+					if (initialGame.player.remainingPointsNeededToWin < card.rank && betterMovePriority == 0) {
 						res = "Psst! You actually could have won on that turn if you played differently. Consider rewinding and playing points";
+						betterMovePriority = 1;
 					}
 				}
 				else if (card.rank == 13) {
-					if (initialGame.player.couldWinWithKing) {
+					if (initialGame.player.couldWinWithKing && betterMovePriority <= 1) {
 						res = "Psst! You actually could have won on that last turn if you played differently. Consider rewinding and playing a king";
+						betterMovePriority = 2;
 					}
 				}
-				else if (card.rank == 11) {
-
+				else if (card.rank == 11 && initialGame.bot.numQueens == 0 && betterMovePriority <= 2) {
+					initialGame.bot.points.forEach(card => {
+						if (card.rank >= initialGame.player.remainingPointsNeededToWin) {
+							res = "Psst! You actually could have won on that last turn if you played differently. Considering rewinding and playing a jack";
+							betterMovePriority = 3;
+						}
+					});
 				}
 			});
+
 		}
 		return res;
 	} 
