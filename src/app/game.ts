@@ -61,5 +61,6 @@ export class Game {
 			this.players[0].hand.push(this.deck.shift());
 			this.players[1].hand.push(this.deck.shift());
 		}
+
 	}
 }
