@@ -1,6 +1,8 @@
 export class Card {
 	suit: number;
 	rank: number;
+	jacks: Card[];
+
 	get img(): string {
 		return `card_${this.suit}_${this.rank}.png`;
 	}
@@ -24,5 +26,6 @@ export class Card {
 	constructor(suit: number, rank: number) {
 		this.suit = suit;
 		this.rank = rank;
+		this.jacks = new Array<Card>();
 	}
 }

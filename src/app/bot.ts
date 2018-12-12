@@ -28,6 +28,8 @@ export class Bot {
                 game.player.points.forEach((target, targetIndex) => {
                     if (card.rank > target.rank || (card.rank == target.rank && card.suit > target.suit)) {
                         var scuttle_copy = cloneDeep(game);
+                        scuttle_copy.scrap = scuttle_copy.scrap.concat(target.jacks);
+                        scuttle_copy.player.points[targetIndex] = [];
                         scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
                         scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
                         possibleMoves.push(new Move("scuttle", scuttle_copy, card, index , target, targetIndex));
@@ -52,7 +54,7 @@ export class Bot {
     evaluateGame(game: Game) {
         let score = game.bot.hand.length + game.bot.pointTotal % 10  + game.bot.pointTotal/10 + game.bot.faceCards.length
             - (game.player.hand.length + game.player.pointTotal % 10 + game.player.pointTotal/10 + game.player.faceCards.length);
-        if (game.playerWins) score = -100
+        if (game.playerWins) {score = -100; console.log("PLAYER COULD WIN")}
         if (game.botWins) score = 100;
         return score;
     }

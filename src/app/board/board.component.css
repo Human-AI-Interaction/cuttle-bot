@@ -66,6 +66,20 @@
 	height: 80%;
 	margin-top: 1%;
 	margin-left: 1%;
+	display: inline-block;
+}
+.pointCardImg {
+	display: inline-block;
+	position: relative;
+	height: 100%;
+}
+
+.jack {
+	display: block;
+    position: relative;
+    height: 50%;
+    top: -104%;
+    left: 7%;
 }
 
 .legalMove {

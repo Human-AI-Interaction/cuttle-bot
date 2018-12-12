@@ -19,7 +19,6 @@ export class GameService {
 		let moves = [];
 		this.validTargets = [];
 		if (this.selected) {
-			console.log("finding legal moves");
 			switch (this.selected.rank) {
 				case 1:
 				case 3:
@@ -32,13 +31,10 @@ export class GameService {
 					// Determine legal scuttles
 					this.game.bot.points.forEach(card => {
 						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
-							console.log(`Found legal scuttle: ${card.name} with ${this.selected.name}`);
 							// Add point to list of scuttles
 							this.validTargets.push(card);
 						}
 					});
-					console.log("Valid targets:" );
-					console.log(this.validTargets);
 					break;
 
 				case 2:
@@ -46,7 +42,6 @@ export class GameService {
 					// Determine legal scuttles
 					this.game.bot.points.forEach(card => {
 						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
-							console.log(`Found legal scuttle: ${card.name} with ${this.selected.name}`);
 							// Add point to list of scuttles
 							this.validTargets.push(card);
 						}
@@ -57,7 +52,6 @@ export class GameService {
 					// Determine legal scuttles
 					this.game.bot.points.forEach(card => {
 						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
-							console.log(`Found legal scuttle: ${card.name} with ${this.selected.name}`);
 							// Add point to list of scuttles
 							this.validTargets.push(card);
 						}
@@ -68,7 +62,6 @@ export class GameService {
 					// Determine legal scuttles
 					this.game.bot.points.forEach(card => {
 						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
-							console.log(`Found legal scuttle: ${card.name} with ${this.selected.name}`);
 							// Add point to list of scuttles
 							this.validTargets.push(card);
 						}
@@ -83,7 +76,8 @@ export class GameService {
 					} 
 					break;
 				case 12:
-				case 13:	
+				case 13:
+					moves.push("field");
 					break;
 			}
 		}
@@ -97,6 +91,8 @@ export class GameService {
 
 	update(game: Game) {
 		this.history.push(game);
+		console.log("Updated game:");
+		console.log(game);
 	} 
 
 	undo() {

@@ -64,13 +64,21 @@ export class BoardComponent implements OnInit {
 
 	targetPoint(card, index) {
 		// Scuttle
+		var gameCopy = this.game.copy();
 		if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
-			var gameCopy = this.game.copy();
+			gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
+			gameCopy.bot.points[index].jacks = [];
 			gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
 			gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 
 			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 
+
+		} else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
+			gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+			gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+		}
 			// Update game
 			this.gameService.update(gameCopy);
 			this.getGame();
@@ -78,8 +86,6 @@ export class BoardComponent implements OnInit {
 			// Delete selection
 			this.gameService.selected = null;
 			this.gameService.selIndex = null;
-
-		}
 	}
 
 	undo() {
