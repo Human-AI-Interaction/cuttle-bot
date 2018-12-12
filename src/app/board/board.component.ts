@@ -21,11 +21,12 @@ export class BoardComponent implements OnInit {
 	draw() {
 		// Check if you're under the hand limit
 		if (this.game.player.hand.length < 8) {
+			let oldGame = this.game.copy();
 			let gameCopy = this.game.copy();
 			gameCopy.players[1].hand.push(gameCopy.deck.shift()); // add card to hand
 			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 			// Add change to history and update game
-			this.gameService.update(gameCopy);
+			this.gameService.update(oldGame, gameCopy);
 			this.getGame();
 			this.gameService.selected = null;
 			this.gameService.selIndex = null;
@@ -35,9 +36,9 @@ export class BoardComponent implements OnInit {
 	playToField() {
 		if (this.gameService.selected) {		
 			// Play for points
+			var oldGame = this.game.copy();
+			var gameCopy = this.game.copy();
 			if (this.gameService.selected.rank <= 10) {
-				var gameCopy = this.game.copy();
-
 				// Move card to points
 				gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
@@ -45,7 +46,8 @@ export class BoardComponent implements OnInit {
 				// this.gameService.botBrain.decideLegalMoves(this.gameService.game);
 			// Play face card
 			} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
-				var gameCopy = this.game.copy();
+				// var oldGame = this.game.copy();
+				// var gameCopy = this.game.copy();
 				gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 
@@ -53,7 +55,7 @@ export class BoardComponent implements OnInit {
 			}
 			
 			// Update game
-			this.gameService.update(gameCopy);
+			this.gameService.update(oldGame, gameCopy);
 			this.getGame();
 
 			// Delete selection
@@ -65,6 +67,7 @@ export class BoardComponent implements OnInit {
 	targetPoint(card, index) {
 		// Scuttle
 		var gameCopy = this.game.copy();
+		let oldGame = this.game.copy();
 		if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
 			gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
 			gameCopy.bot.points[index].jacks = [];
@@ -80,12 +83,13 @@ export class BoardComponent implements OnInit {
 			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 		}
 			// Update game
-			this.gameService.update(gameCopy);
+			this.gameService.update(oldGame, gameCopy);
 			this.getGame();
 
 			// Delete selection
 			this.gameService.selected = null;
 			this.gameService.selIndex = null;
+
 	}
 
 	undo() {

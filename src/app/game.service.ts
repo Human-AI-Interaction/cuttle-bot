@@ -89,10 +89,18 @@ export class GameService {
 		return this.history[this.history.length - 1];
 	}
 
-	update(game: Game) {
-		this.history.push(game);
-		console.log("Updated game:");
-		console.log(game);
+	update(oldGame: Game, newGame: Game) {
+		this.history.push(newGame);
+
+		if (this.game.player.isWinner) {
+			alert("You won! Way to go!");
+		} else {
+			const suggestion = this.botBrain.suggestMove(oldGame, newGame);
+			if (suggestion) alert(suggestion);
+		}
+		if (this.game.bot.isWinner) {
+			// alert("Aww, you lost! Nice try.");
+		}		
 	} 
 
 	undo() {

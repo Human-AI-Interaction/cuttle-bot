@@ -34,6 +34,46 @@ export class Player {
 		});
 		return res;
 	}
+	get remainingPointsNeededToWin() {
+		let res = 21;
+		switch (this.numKings) {
+			case 0:
+				res = 21;
+				break;
+			case 1:
+				res = 14;
+				break;
+			case 2:
+				res = 10;
+				break;
+			case 3:
+				res = 7;
+				break;
+			case 4:
+				res = 5;
+				break;
+		}
+		res -= this.pointTotal;
+		return res;
+	}
+	get couldWinWithKing() {
+		let res = false;
+		switch (this.numKings) {
+			case 0:
+				if (this.pointTotal >= 14) res = true;
+				break;
+			case 1:
+				if (this.pointTotal >= 10) res = true;
+				break;
+			case 2:
+				if (this.pointTotal >= 7) res = true;
+				break;
+			case 3:
+				if (this.pointTotal >= 5) res = true;
+				break;
+		}
+		return res;
+	}
 	get isWinner() {
 		let res = false;
 		let score = this.score;

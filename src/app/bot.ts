@@ -150,6 +150,30 @@ export class Bot {
 		return game;
 	}
 
+	suggestMove(initialGame: Game, gameAfterPlayerMove: Game) {
+		console.log(initialGame);
+		let res = null;
+		// Only consider suggesting move if player didn't win
+		if (!gameAfterPlayerMove.player.isWinner) {
+			initialGame.player.hand.forEach((card, index) => {
+				if (card.rank <= 10) {
+					if (initialGame.player.remainingPointsNeededToWin < card.rank) {
+						res = "Psst! You actually could have won on that turn if you played differently. Consider rewinding and playing points";
+					}
+				}
+				else if (card.rank == 13) {
+					if (initialGame.player.couldWinWithKing) {
+						res = "Psst! You actually could have won on that last turn if you played differently. Consider rewinding and playing a king";
+					}
+				}
+				else if (card.rank == 11) {
+
+				}
+			});
+		}
+		return res;
+	} 
+
 	constructor() {
 
 	}
