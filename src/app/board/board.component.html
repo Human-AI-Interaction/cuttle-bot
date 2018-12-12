@@ -1,32 +1,46 @@
 <img id="undo" src="assets/back-arrow.png" (click)="undo()">
-<app-hand id="botHand" [player]="game.players[0]"></app-hand>
 
-<img src="assets/deck.jpg" id="deck" (click)="draw()">
-<img src="assets/scrap.jpg" id="scrap">
+<div class="flex-all">
+	<div id="side">
+		<img src="assets/deck.jpg" id="deck" (click)="draw()">
+		<img src="assets/scrap.jpg" id="scrap">
+	</div>
 
-<div id="field">
-	<div id="botField" class="field">
-		<div id="botPoints" class="fieldArea">
-			<div *ngFor="let card of game.bot.points index as index" class="yourPointCard">
-				<img src="assets/cards/{{card.img}}"  [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}" (click)="targetPoint(card, index)" class="pointCardImg">
-				<img *ngFor="let jack of card.jacks index as jackIndex" src="assets/cards/{{jack.img}}" class="jack">
+	<div class="flex-container">
+
+		<!-- <div class="flex-container flex1"> -->
+		<app-hand id="botHand" [player]="game.players[0]"></app-hand>
+		<!-- </div> -->
+
+
+		<div id="field">
+			<div id="botField" class="field">
+				<div id="botPoints" class="fieldArea">
+					<div *ngFor="let card of game.bot.points index as index" class="yourPointCard">
+						<img src="assets/cards/{{card.img}}" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}"
+						 (click)="targetPoint(card, index)" class="pointCardImg">
+						<img *ngFor="let jack of card.jacks index as jackIndex" src="assets/cards/{{jack.img}}" class="jack">
+					</div>
+				</div>
+				<div id="botFaceCards" class="fieldArea">
+					<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="yourPointCard" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}">
+				</div>
+			</div>
+			<div id="yourField" class="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
+				<div id="yourPoints" class="fieldArea">
+
+					<div *ngFor="let card of game.player.points" class="yourPointCard">
+						<img src="assets/cards/{{card.img}}" class="pointCardImg">
+						<img *ngFor="let jack of card.jacks" src="assets/cards/{{jack.img}}" class="jack">
+					</div>
+				</div>
+				<div id="yourPointsFace" class="fieldArea">
+					<img *ngFor="let card of game.player.faceCards" src="assets/cards/{{card.img}}" class="pointCardImg">
+				</div>
 			</div>
 		</div>
-		<div id="botFaceCards" class="fieldArea">
-			<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="yourPointCard" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}">
-		</div>
+		<app-hand id="yourHand" [player]="game.players[1]"></app-hand>
+		<div id="indicator">Victory requirements: {{game.player.remainingPointsNeededToWin}} points</div>
 	</div>
-	<div id="yourField" class="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
-		<div id="yourPoints" class="fieldArea">
 
-			<div *ngFor="let card of game.player.points" class="yourPointCard">
-				<img  src="assets/cards/{{card.img}}" class="pointCardImg">
-				<img *ngFor="let jack of card.jacks" src="assets/cards/{{jack.img}}" class="jack">
-			</div>
-		</div>
-		<div id="yourPoints" class="fieldArea">
-				<img *ngFor="let card of game.player.faceCards" src="assets/cards/{{card.img}}" class="pointCardImg">
-		</div>
-	</div>
 </div>
-<app-hand id="yourHand" [player]="game.players[1]"></app-hand>

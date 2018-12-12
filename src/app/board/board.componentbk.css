@@ -1,0 +1,96 @@
+.flex-container {
+	display: flex;
+}
+
+#undo {
+    position: absolute;
+    display: inline-block;
+    height: 8%;
+}
+
+#botHand {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 15%;
+	top: 10%;
+}
+
+#yourHand {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 15%;
+	bottom: 10%;
+}
+
+#deck {
+	position: absolute;
+	display: inline-block;
+	height: 20%;
+	top: 28%;
+	margin-left: 2%;
+}
+
+#scrap {
+	position: absolute;
+	display: inline-block;
+	height: 20%;
+	top: 49%;
+	margin-left: 2%;	
+}
+
+
+
+#field {
+	position: relative;
+	display: inline-block;
+	position: absolute;
+	border: 2px solid black;
+	height: 40%;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 12%;
+	/* margin: 24em 40em 0 20em; */
+}
+
+
+.field {
+	display: block;
+	position: relative;
+	height: 50%;
+}
+.fieldArea {
+	display: inline-block;
+	position: relative;
+	height: 100%;
+	width: 50%;
+	
+}
+
+.yourPointCard {
+	height: 80%;
+	margin-top: 1%;
+	margin-left: 1%;
+	display: inline-block;
+}
+.pointCardImg {
+	display: inline-block;
+	position: relative;
+	height: 100%;
+}
+
+.jack {
+	display: block;
+    position: relative;
+    height: 50%;
+    top: -104%;
+    left: 7%;
+}
+
+.legalMove {
+	background-color: rgb(91, 194, 69);
+}
+.validTarget {
+	border: 2px solid rgb(91, 194, 69);
+}
