@@ -23,7 +23,7 @@
 					</div>
 				</div>
 				<div id="botFaceCards" class="fieldArea">
-					<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="yourPointCard" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}">
+					<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="pointCardImg" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}">
 				</div>
 			</div>
 			<div id="yourField" class="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
