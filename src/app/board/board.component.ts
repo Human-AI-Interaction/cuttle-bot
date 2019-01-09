@@ -92,6 +92,46 @@ export class BoardComponent implements OnInit {
 
 	}
 
+	untargetedOneOff() {
+		if (this.gameService.selected) {
+			var gameCopy = this.game.copy();
+			let oldGame = this.game.copy();
+			switch (this.gameService.selected.rank) {
+				case 1:
+					// code...
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				case 5:
+					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+					gameCopy.player.hand = gameCopy.player.hand.concat(gameCopy.deck.shift());
+					if (gameCopy.player.hand.length < 8) {
+						gameCopy.player.hand = gameCopy.player.hand.concat(gameCopy.deck.shift());
+					}
+					break;
+				case 6:
+					break;
+				case 7:
+					break;
+				default:
+					// code...
+					break;
+			}
+			// Bot move
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+
+			// Update game
+			this.gameService.update(oldGame, gameCopy);
+			this.getGame();
+
+			// Delete selection
+			this.gameService.selected = null;
+			this.gameService.selIndex = null;
+		}
+	}
+
 	undo() {
 		this.gameService.undo();
 		this.getGame();

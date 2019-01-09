@@ -3,7 +3,7 @@
 <div class="flex-all">
 	<div id="side">
 		<img src="assets/deck.jpg" id="deck" (click)="draw()">
-		<img src="assets/scrap.jpg" id="scrap">
+		<img src="assets/scrap.jpg" id="scrap" (click)="untargetedOneOff()" [ngClass]="{'validTarget': gs.selected &&  [1, 3, 4, 5, 6, 7].indexOf(gs.selected.rank) > -1}">
 	</div>
 
 	<div class="flex-container">
