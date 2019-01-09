@@ -29,7 +29,7 @@ export class Bot {
 					if (card.rank > target.rank || (card.rank == target.rank && card.suit > target.suit)) {
 						var scuttle_copy = cloneDeep(game);
 						scuttle_copy.scrap = scuttle_copy.scrap.concat(target.jacks);
-						scuttle_copy.player.points[targetIndex] = [];
+						scuttle_copy.player.points[targetIndex].jacks = [];
 						scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
 						scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
 						possibleMoves.push(new Move("scuttle", scuttle_copy, card, index , target, targetIndex));
@@ -137,8 +137,13 @@ export class Bot {
 				game.bot.points.push(game.bot.hand.splice(move.index, 1)[0]);
 				break;
 			case "scuttle":
+				console.log("Bot is scuttling");
 				game.scrap.push(game.bot.hand.splice(move.index)[0]);
+				console.log("Bot's card scrapped");
+				console.log(game.scrap);
 				game.scrap.push(game.player.hand.splice(move.target_index)[0]);
+				console.log("your card scrapped");
+				console.log(game.scrap);
 				break;
 			case "oneOff":
 			// A LOT!
@@ -151,7 +156,6 @@ export class Bot {
 	}
 
 	suggestMove(initialGame: Game, gameAfterPlayerMove: Game) {
-		console.log(initialGame);
 		let res = null;
 		// Only consider suggesting move if player didn't win
 		if (!gameAfterPlayerMove.player.isWinner) {

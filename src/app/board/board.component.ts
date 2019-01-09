@@ -93,13 +93,31 @@ export class BoardComponent implements OnInit {
 	}
 
 	untargetedOneOff() {
-		if (this.gameService.selected) {
+		if (this.gameService.selected && [1, 3, 4, 5, 6, 7].indexOf(this.gameService.selected.rank) > -1) {
 			var gameCopy = this.game.copy();
 			let oldGame = this.game.copy();
 			switch (this.gameService.selected.rank) {
+				// Destroy all Points and attached jacks
 				case 1:
-					// code...
+					gameCopy.player.points.forEach(point => {
+						console.log("scrapping: your" + point.name + ". Removed jacks:");
+						gameCopy.scrap = gameCopy.scrap.concat(point.jacks);
+						console.log(gameCopy.scrap);
+						point.jacks = [];
+						gameCopy.scrap.push(point);
+					});
+					gameCopy.player.points = [];
+
+					gameCopy.bot.points.forEach(point => {
+						console.log("scrapping bot's: " + point.name + ". Removed jacks:");
+						gameCopy.scrap = gameCopy.scrap.concat(point.jacks);
+						console.log(gameCopy.scrap);
+						point.jacks = [];
+						gameCopy.scrap.push(point);
+					});
+					gameCopy.bot.points = [];
 					break;
+				// Fetch one card from scrap pile
 				case 3:
 					break;
 				case 4:
@@ -119,6 +137,8 @@ export class BoardComponent implements OnInit {
 					// code...
 					break;
 			}
+			// Move played card from hand to scrap
+			gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 			// Bot move
 			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 
