@@ -130,6 +130,43 @@ export class BoardComponent implements OnInit {
 					}
 					break;
 				case 6:
+					gameCopy.player.faceCards.forEach(faceCard => {
+						gameCopy.scrap.push(faceCard);
+					});
+					gameCopy.player.faceCards = [];
+
+					gameCopy.bot.faceCards.forEach(faceCard => {
+						gameCopy.scrap.push(faceCard);
+					});
+					gameCopy.bot.faceCards = [];
+
+					// Remove jacks and determine which point cards must be exchanged
+					let indicesToMove = [];
+					gameCopy.player.points.forEach((point, index) => {
+						if (point.jacks.length % 2 != 0) {
+							indicesToMove.push(index);
+						}
+						gameCopy.scrap = gameCopy.scrap.concat(point.jacks);
+						point.jacks = [];
+					});
+					// Switch any points from player to bot
+					while (indicesToMove.length > 0) {
+						var index = indicesToMove.pop();
+						gameCopy.bot.points.push(gameCopy.player.points.splice(index, 1)[0]);
+					}
+
+					gameCopy.bot.points.forEach((point, index) => {
+						if (point.jacks.length % 2 != 0) {
+							indicesToMove.push(index);
+						}
+						gameCopy.scrap = gameCopy.scrap.concat(point.jacks);
+						point.jacks = [];
+					});
+					// Switch any points from bot to player
+					while (indicesToMove.length > 0) {
+						var index = indicesToMove.pop();
+						gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+					}
 					break;
 				case 7:
 					break;
