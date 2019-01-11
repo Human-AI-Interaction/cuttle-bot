@@ -116,6 +116,9 @@ export class Bot {
 			case "jack":
 				announcement = `Cuttle Bot steals your ${best_move.target.name} with its ${best_move.card.name}`;
 				break;
+			case "oneOff": 
+				announcement = `Cuttle Bot plays the ${best_move.card.name} for one-off effects`;
+				break;
 			default:
 				// code...
 				break;
@@ -142,6 +145,7 @@ export class Bot {
 				break;
 			case "oneOff":
 			// A LOT!
+			// How do I implement one-off here???
 				break;
 			case "faceCard":
 				game.bot.faceCards.push(game.bot.hand.splice(move.index, 1)[0])
