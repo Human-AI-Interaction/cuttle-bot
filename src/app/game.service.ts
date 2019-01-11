@@ -90,6 +90,7 @@ export class GameService {
 	}
 
 	update(oldGame: Game, newGame: Game) {
+		console.log(newGame);
 		this.history.push(newGame);
 
 		if (this.game.player.isWinner) {
