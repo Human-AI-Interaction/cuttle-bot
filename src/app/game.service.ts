@@ -14,6 +14,9 @@ export class GameService {
 	selected: Card;
 	selIndex: number;
 	validTargets: Card[];
+	gameCopy: Game;
+	oldGameCopy: Game;
+	chooseScrap: boolean;
 
 	get legalMoves() {
 		let moves = [];
@@ -119,5 +122,6 @@ export class GameService {
 		this.selIndex = null;
 		this.selected = null;
 		this.botBrain = new Bot();
+		this.chooseScrap = false;
 	}
 }

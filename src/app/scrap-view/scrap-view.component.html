@@ -1,0 +1,2 @@
+<h1>Choose a card from the scrap pile</h1>
+<img *ngFor="let card of gameService.game.scrap index as index" src="assets/cards/{{card.img}}" (click)="chooseCard(index)">

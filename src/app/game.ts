@@ -6,6 +6,7 @@ export class Game {
 	players: Player[];
 	deck: Card[];
 	scrap: Card[];
+	oneOff: Card;
 	// turn: number;
 
 	////////////

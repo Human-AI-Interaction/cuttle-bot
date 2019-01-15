@@ -14,6 +14,7 @@
 
 
 		<div id="field">
+			<app-scrap-view *ngIf="gs.chooseScrap"></app-scrap-view>
 			<div id="botField" class="field">
 				<div id="botPoints" class="fieldArea">
 					<div *ngFor="let card of game.bot.points index as index" class="yourPointCard">
@@ -26,6 +27,7 @@
 					<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="pointCardImg" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}">
 				</div>
 			</div>
+
 			<div id="yourField" class="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
 				<div id="yourPoints" class="fieldArea">
 
