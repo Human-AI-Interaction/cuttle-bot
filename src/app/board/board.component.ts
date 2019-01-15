@@ -121,6 +121,13 @@ export class BoardComponent implements OnInit {
 				case 3:
 					break;
 				case 4:
+					gameCopy.scrap.push(gameCopy.bot.hand.pop());
+					gameCopy.scrap.push(gameCopy.bot.hand.pop());
+					console.log(gameCopy.scrap);
+					const firstDiscard = gameCopy.scrap[gameCopy.scrap.length - 2].name;
+					const secondDiscard = gameCopy.scrap[gameCopy.scrap.length - 1].name;
+					alert(`Cuttle Bot discards the ${firstDiscard} and the ${secondDiscard}`);
+
 					break;
 				case 5:
 					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
