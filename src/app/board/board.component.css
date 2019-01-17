@@ -137,3 +137,13 @@
 .validTarget {
 	border: 3px solid rgb(91, 194, 69);
 }
+
+/*Scrap view overlaying field*/
+app-scrap-view {
+	position: absolute;
+	display: block;
+	height: 100%;
+	width: 100%;
+	background-color: #FFF;
+	z-index: 3;
+}

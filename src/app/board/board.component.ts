@@ -8,15 +8,15 @@ import { GameService } from '../game.service';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-	game: Game;
 
 	get gs() {
 		return this.gameService;
 	}
 
-	getGame() {
-		this.game = this.gameService.game;
+	get game() {
+		return this.gameService.game;
 	}
+
 
 	draw() {
 		// Check if you're under the hand limit
@@ -27,7 +27,6 @@ export class BoardComponent implements OnInit {
 			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 			// Add change to history and update game
 			this.gameService.update(oldGame, gameCopy);
-			this.getGame();
 			this.gameService.selected = null;
 			this.gameService.selIndex = null;
 		}
@@ -56,7 +55,6 @@ export class BoardComponent implements OnInit {
 			
 			// Update game
 			this.gameService.update(oldGame, gameCopy);
-			this.getGame();
 
 			// Delete selection
 			this.gameService.selected = null;
@@ -84,7 +82,6 @@ export class BoardComponent implements OnInit {
 		}
 			// Update game
 			this.gameService.update(oldGame, gameCopy);
-			this.getGame();
 
 			// Delete selection
 			this.gameService.selected = null;
@@ -96,6 +93,7 @@ export class BoardComponent implements OnInit {
 		if (this.gameService.selected && [1, 3, 4, 5, 6, 7].indexOf(this.gameService.selected.rank) > -1) {
 			var gameCopy = this.game.copy();
 			let oldGame = this.game.copy();
+			let done = true;
 			switch (this.gameService.selected.rank) {
 				// Destroy all Points and attached jacks
 				case 1:
@@ -119,8 +117,17 @@ export class BoardComponent implements OnInit {
 					break;
 				// Fetch one card from scrap pile
 				case 3:
+					this.gs.chooseScrap = true;
+					done = false;
 					break;
 				case 4:
+					gameCopy.scrap.push(gameCopy.bot.hand.pop());
+					gameCopy.scrap.push(gameCopy.bot.hand.pop());
+					console.log(gameCopy.scrap);
+					const firstDiscard = gameCopy.scrap[gameCopy.scrap.length - 2].name;
+					const secondDiscard = gameCopy.scrap[gameCopy.scrap.length - 1].name;
+					alert(`Cuttle Bot discards the ${firstDiscard} and the ${secondDiscard}`);
+
 					break;
 				case 5:
 					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
@@ -174,14 +181,24 @@ export class BoardComponent implements OnInit {
 					// code...
 					break;
 			}
-			// Move played card from hand to scrap
-			gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-			// Bot move
-			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+
+			if (done) {
+				// Move played card from hand to scrap
+				gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				// Bot move
+				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+
+
+			}
+			// If player needs to take further action (3's and 7's), store current gamestate as temp
+			else {
+				gameCopy.oneOff = gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0];
+				this.gameService.gameCopy = gameCopy;
+				this.gameService.oldGameCopy = oldGame;
+			}
 
 			// Update game
 			this.gameService.update(oldGame, gameCopy);
-			this.getGame();
 
 			// Delete selection
 			this.gameService.selected = null;
@@ -191,15 +208,12 @@ export class BoardComponent implements OnInit {
 
 	undo() {
 		this.gameService.undo();
-		this.getGame();
 	}
-
 
 
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
-		this.getGame();
 	}
 
 }
