@@ -44,7 +44,6 @@ export class BoardComponent implements OnInit {
 				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 
 				// this.gameService.botBrain.decideLegalMoves(this.gameService.game);
-				
 			// Play face card
 			} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
 				// var oldGame = this.game.copy();
