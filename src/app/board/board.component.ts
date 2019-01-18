@@ -8,6 +8,7 @@ import { GameService } from '../game.service';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
+	showDeck: boolean;
 
 	get gs() {
 		return this.gameService;
@@ -109,6 +110,8 @@ export class BoardComponent implements OnInit {
 			}
 		}
 
+		gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+
 		this.gameService.update(oldGame, gameCopy);
 
 			// Delete selection
@@ -117,8 +120,6 @@ export class BoardComponent implements OnInit {
 	}
 
 	targetedOneOffJack(card, index) {
-
-		console.log("targeting 2 to a Jack");
 
 		var gameCopy = this.game.copy();
 		let oldGame = this.game.copy();
@@ -141,6 +142,7 @@ export class BoardComponent implements OnInit {
 					break;
 
 			}
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 		}
 		this.gameService.update(oldGame, gameCopy);
 
@@ -270,10 +272,15 @@ export class BoardComponent implements OnInit {
 		this.gameService.undo();
 	}
 
+	stackDeck(index) {
+		this.game.deck.unshift(this.game.deck.splice(index, 1)[0]);
+	}
+
 
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
+		this.showDeck = false;
 	}
 
 }

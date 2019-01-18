@@ -43,6 +43,10 @@
 		</div>
 		<app-hand id="yourHand" [player]="game.players[1]"></app-hand>
 		<div id="indicator">Victory requirements: {{game.player.remainingPointsNeededToWin}} points</div>
+		<button (click)="showDeck = !showDeck">Toggle Deck</button>
+		<div *ngIf="showDeck" id="revealedDeck">
+			<img *ngFor="let card of game.deck index as index" src="assets/cards/{{card.img}}" class="revealedDeckCard" (click)="stackDeck(index)">
+		</div>
 	</div>
 
 </div>
