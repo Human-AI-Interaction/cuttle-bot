@@ -79,14 +79,74 @@ export class BoardComponent implements OnInit {
 			gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 			gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
 			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+		} 
+		// Update game
+		this.gameService.update(oldGame, gameCopy);
+
+		// Delete selection
+		this.gameService.selected = null;
+		this.gameService.selIndex = null;
+
+	}
+
+	targetedOneOffFaces(card, index) {
+		console.log("targeting 2 to other face cards");
+
+		// not including eights yet
+		var gameCopy = this.game.copy();
+		let oldGame = this.game.copy();
+
+		if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1) {
+			switch (this.gameService.selected.rank) {
+				case 2:
+					gameCopy.scrap.push( gameCopy.bot.faceCards.splice(index, 1)[0]);
+					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+
+					break;
+				case 9:
+					break;
+
+			}
 		}
-			// Update game
-			this.gameService.update(oldGame, gameCopy);
+
+		this.gameService.update(oldGame, gameCopy);
 
 			// Delete selection
-			this.gameService.selected = null;
-			this.gameService.selIndex = null;
+		this.gameService.selected = null;
+		this.gameService.selIndex = null;
+	}
 
+	targetedOneOffJack(card, index) {
+
+		console.log("targeting 2 to a Jack");
+
+		var gameCopy = this.game.copy();
+		let oldGame = this.game.copy();
+
+		console.log(card.rank);
+
+		if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1 && card.jacks.length >= 1) {
+			switch (this.gameService.selected.rank) {
+				case 2:
+					console.log("using 2 for targeted on off");
+					gameCopy.scrap.push(gameCopy.bot.points[index].jacks.shift());
+
+					gameCopy.player.points.push(gameCopy.bot.points[index]);
+					gameCopy.bot.points.splice(index, 1);
+
+					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+
+					break;
+				case 9:
+					break;
+
+			}
+		}
+		this.gameService.update(oldGame, gameCopy);
+
+			// Delete selection
+		this.gameService.selected = null;
+		this.gameService.selIndex = null;
 	}
 
 	untargetedOneOff() {
