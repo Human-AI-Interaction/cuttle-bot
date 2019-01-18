@@ -16,7 +16,9 @@ export class GameService {
 	validTargets: Card[];
 	gameCopy: Game;
 	oldGameCopy: Game;
-	chooseScrap: boolean;
+	chooseScrap: boolean; //player is playing a 3
+	chooseDeck: boolean; //player is playing a 7
+
 
 	get legalMoves() {
 		let moves = [];
@@ -123,5 +125,6 @@ export class GameService {
 		this.selected = null;
 		this.botBrain = new Bot();
 		this.chooseScrap = false;
+		this.chooseDeck = false;
 	}
 }
