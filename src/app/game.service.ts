@@ -43,6 +43,19 @@ export class GameService {
 					break;
 
 				case 2:
+					this.game.bot.points.forEach(card => {
+						if(card.jacks.length >= 1){
+							console.log(card.jacks.length - 1);
+							this.validTargets.push(card.jacks[card.jacks.length - 1]);
+						}
+					});
+
+					this.game.bot.faceCards.forEach(card => {
+						this.validTargets.push(card);
+						console.log(this.validTargets);
+					});
+
+					break;
 				case 9:
 					// Determine legal scuttles
 					this.game.bot.points.forEach(card => {

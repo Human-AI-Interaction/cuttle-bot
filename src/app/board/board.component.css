@@ -157,3 +157,16 @@ app-deck-view {
 	background-color: #FFF;
 	z-index: 3;
 }
+
+#revealedDeck {
+	display: block;
+	position: absolute;
+	height: 100%;
+	top: 120%;
+}
+
+.revealedDeckCard {
+	display: inline-block;
+	position: relative;
+	height: 10%;
+}

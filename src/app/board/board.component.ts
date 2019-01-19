@@ -8,6 +8,7 @@ import { GameService } from '../game.service';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
+	showDeck: boolean;
 
 	get gs() {
 		return this.gameService;
@@ -79,14 +80,75 @@ export class BoardComponent implements OnInit {
 			gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 			gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
 			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+		} 
+		// Update game
+		this.gameService.update(oldGame, gameCopy);
+
+		// Delete selection
+		this.gameService.selected = null;
+		this.gameService.selIndex = null;
+
+	}
+
+	targetedOneOffFaces(card, index) {
+		console.log("targeting 2 to other face cards");
+
+		// not including eights yet
+		var gameCopy = this.game.copy();
+		let oldGame = this.game.copy();
+
+		if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1) {
+			switch (this.gameService.selected.rank) {
+				case 2:
+					gameCopy.scrap.push( gameCopy.bot.faceCards.splice(index, 1)[0]);
+					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+
+					break;
+				case 9:
+					break;
+
+			}
 		}
-			// Update game
-			this.gameService.update(oldGame, gameCopy);
+
+		gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+
+		this.gameService.update(oldGame, gameCopy);
 
 			// Delete selection
-			this.gameService.selected = null;
-			this.gameService.selIndex = null;
+		this.gameService.selected = null;
+		this.gameService.selIndex = null;
+	}
 
+	targetedOneOffJack(card, index) {
+
+		var gameCopy = this.game.copy();
+		let oldGame = this.game.copy();
+
+		console.log(card.rank);
+
+		if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1 && card.jacks.length >= 1) {
+			switch (this.gameService.selected.rank) {
+				case 2:
+					console.log("using 2 for targeted on off");
+					gameCopy.scrap.push(gameCopy.bot.points[index].jacks.shift());
+
+					gameCopy.player.points.push(gameCopy.bot.points[index]);
+					gameCopy.bot.points.splice(index, 1);
+
+					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+
+					break;
+				case 9:
+					break;
+
+			}
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+		}
+		this.gameService.update(oldGame, gameCopy);
+
+			// Delete selection
+		this.gameService.selected = null;
+		this.gameService.selIndex = null;
 	}
 
 	untargetedOneOff() {
@@ -212,10 +274,15 @@ export class BoardComponent implements OnInit {
 		this.gameService.undo();
 	}
 
+	stackDeck(index) {
+		this.game.deck.unshift(this.game.deck.splice(index, 1)[0]);
+	}
+
 
 	constructor(private gameService: GameService) {}
 
 	ngOnInit() {
+		this.showDeck = false;
 	}
 
 }

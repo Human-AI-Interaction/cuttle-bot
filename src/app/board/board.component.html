@@ -21,11 +21,11 @@
 					<div *ngFor="let card of game.bot.points index as index" class="yourPointCard">
 						<img src="assets/cards/{{card.img}}" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}"
 						 (click)="targetPoint(card, index)" class="pointCardImg">
-						<img *ngFor="let jack of card.jacks index as jackIndex" src="assets/cards/{{jack.img}}" class="jack">
+						<img *ngFor="let jack of card.jacks index as jackIndex" src="assets/cards/{{jack.img}}" class="jack" [ngClass]="{'validTarget': gameService.validTargets.indexOf(jack) > -1}" (click)="targetedOneOffJack(card, index)">
 					</div>
 				</div>
 				<div id="botFaceCards" class="fieldArea">
-					<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="pointCardImg" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}">
+					<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="pointCardImg" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}" (click)="targetedOneOffFaces(card, index)">
 				</div>
 			</div>
 
@@ -44,6 +44,10 @@
 		</div>
 		<app-hand id="yourHand" [player]="game.players[1]"></app-hand>
 		<div id="indicator">Victory requirements: {{game.player.remainingPointsNeededToWin}} points</div>
+		<button (click)="showDeck = !showDeck">Toggle Deck</button>
+		<div *ngIf="showDeck" id="revealedDeck">
+			<img *ngFor="let card of game.deck index as index" src="assets/cards/{{card.img}}" class="revealedDeckCard" (click)="stackDeck(index)">
+		</div>
 	</div>
 
 </div>
