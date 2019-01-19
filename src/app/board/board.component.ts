@@ -70,20 +70,38 @@ export class BoardComponent implements OnInit {
 		// Scuttle
 		var gameCopy = this.game.copy();
 		let oldGame = this.game.copy();
-		if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
-			gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
-			gameCopy.bot.points[index].jacks = [];
-			gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
-			gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-
-			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-
-
-		} else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
-			gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-			gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
-			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-		} 
+		// Playing card from hand
+		if (!this.gameService.chooseDeck) {
+			// Scuttling
+			if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
+				gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
+				gameCopy.bot.points[index].jacks = [];
+				gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
+				gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+			// Playing Jack
+			} else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
+				gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+			} 
+		// playing card from deck with 7
+		} else {
+			// Scuttling
+			if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
+				gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
+				gameCopy.bot.points[index].jacks = [];
+				gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
+				gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+			// Playing Jack
+			} else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
+				gameCopy.bot.points[index].jacks.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+				gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+			}
+			gameCopy.scrap.push(gameCopy.oneOff);
+			gameCopy.oneOff = null;
+			gameCopy.selIndex = null;
+			this.gameService.chooseDeck = false;
+		}
+		gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 		// Update game
 		this.gameService.update(oldGame, gameCopy);
 
@@ -94,7 +112,6 @@ export class BoardComponent implements OnInit {
 	}
 
 	targetedOneOffFaces(card, index) {
-		console.log("targeting 2 to other face cards");
 
 		// not including eights yet
 		var gameCopy = this.game.copy();

@@ -12,3 +12,7 @@ img {
 #topCard {
 	margin-left: 34%;
 }
+
+.selected {
+	border: 2px solid green;
+}
