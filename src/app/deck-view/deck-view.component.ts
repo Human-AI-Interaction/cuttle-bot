@@ -7,9 +7,23 @@ import { GameService } from '../game.service';
 })
 export class DeckViewComponent implements OnInit {
 
-  constructor(private gameService: GameService) { }
+	get selected() {
+		return this.gameService.selected;
+	}
 
-  ngOnInit() {
-  }
+	clickDeckCard(index) {
+		if (this.selected == this.gameService.game.deck[index]) {
+			this.gameService.selected = null;
+			this.gameService.selIndex = null;
+		} else {
+			this.gameService.selected = this.gameService.game.deck[index];
+			this.gameService.selIndex = index;
+		}
+	}
+
+	constructor(private gameService: GameService) { }
+
+	ngOnInit() {
+	}
 
 }

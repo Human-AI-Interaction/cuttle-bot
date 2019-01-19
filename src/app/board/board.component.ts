@@ -34,32 +34,35 @@ export class BoardComponent implements OnInit {
 	}
 
 	playToField() {
-		if (this.gameService.selected) {		
-			// Play for points
+		if (this.gameService.selected) {
 			var oldGame = this.game.copy();
 			var gameCopy = this.game.copy();
-			if (this.gameService.selected.rank <= 10) {
-				// Move card to points
-				gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-
-				// this.gameService.botBrain.decideLegalMoves(this.gameService.game);
-			// Play face card
-			} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
-				// var oldGame = this.game.copy();
-				// var gameCopy = this.game.copy();
-				gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-
-				
+			// Playing card from your hand
+			if (!this.gameService.chooseDeck) {
+				if (this.gameService.selected.rank <= 10) {
+					// Move card to points
+					gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
+					// Play face card
+					gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);					
+				}
+			// Playing card from deck using a 7
+			} else {
+				if (this.gameService.selected.rank <= 10) {
+					gameCopy.player.points.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+				} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
+					gameCopy.player.faceCards.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+				}
+				this.gameService.chooseDeck = false;
+				gameCopy.scrap.push(this.game.oneOff);
+				gameCopy.oneOff = null;
 			}
-			
-			// Update game
-			this.gameService.update(oldGame, gameCopy);
-
 			// Delete selection
 			this.gameService.selected = null;
 			this.gameService.selIndex = null;
+			// Update game
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+			this.gameService.update(oldGame, gameCopy);
 		}
 	}
 
