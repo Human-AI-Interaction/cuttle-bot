@@ -96,12 +96,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _board_board_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./board/board.component */ "./src/app/board/board.component.ts");
 /* harmony import */ var _hand_hand_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hand/hand.component */ "./src/app/hand/hand.component.ts");
+/* harmony import */ var _scrap_view_scrap_view_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scrap-view/scrap-view.component */ "./src/app/scrap-view/scrap-view.component.ts");
+/* harmony import */ var _deck_view_deck_view_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./deck-view/deck-view.component */ "./src/app/deck-view/deck-view.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -115,7 +119,9 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
                 _board_board_component__WEBPACK_IMPORTED_MODULE_3__["BoardComponent"],
-                _hand_hand_component__WEBPACK_IMPORTED_MODULE_4__["HandComponent"]
+                _hand_hand_component__WEBPACK_IMPORTED_MODULE_4__["HandComponent"],
+                _scrap_view_scrap_view_component__WEBPACK_IMPORTED_MODULE_5__["ScrapViewComponent"],
+                _deck_view_deck_view_component__WEBPACK_IMPORTED_MODULE_6__["DeckViewComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]
@@ -138,7 +144,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex-all {\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n\tjustify-content: left;;\r\n}\r\n\r\n.flex-container {\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\talign-items: center;\r\n\r\n}\r\n\r\n.flex1 {\r\n\theight: 15%;\r\n}\r\n\r\n#side {\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\tmargin: auto 10px;\r\n}\r\n\r\n#undo {\r\n    /* position: absolute; */\r\n\tdisplay: inline-block;\r\n\theight: 8%;\r\n    max-height: 64px;\r\n}\r\n\r\n#botHand, #yourHand {\r\n\t/* position: absolute; */\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n\twidth: 80%;\r\n\t/* height: 15%; */\r\n\t/* top: 10%; */\r\n}\r\n\r\n#indicator {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size: 2em;\r\n}\r\n\r\n/* #yourHand { */\r\n\r\n/* position: absolute; */\r\n\r\n/* display: block; */\r\n\r\n/* width: 100%; */\r\n\r\n/* max-height: 200px;\r\n\twidth: 80%;\r\n\theight: 15%; */\r\n\r\n/* bottom: 10%; */\r\n\r\n/* } */\r\n\r\n#deck {\r\n\t/* position: absolute; */\r\n\t/* display: inline-block; */\r\n\theight: 20%;\r\n\t/* top: 28%; */\r\n\t/* margin-left: 2%; */\r\n}\r\n\r\n#scrap {\r\n\t/* position: absolute; */\r\n\t/* display: inline-block; */\r\n\theight: 20%;\r\n\t/* top: 49%; */\r\n\r\n}\r\n\r\n#field {\r\n\tposition: relative;\r\n\tjustify-content: center;\r\n\t/* display: inline-block; */\r\n\tborder: 2px solid black;\r\n\tmin-width: 1200px;\r\n\twidth: 100%;\r\n\tmin-height: 400px;\r\n\tmax-height: 600px;\r\n\r\n}\r\n\r\n.field {\r\n\t/* display: block; */\r\n\tposition: relative;\r\n\theight: 50%;\r\n}\r\n\r\n.fieldArea {\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\t/* height: 100%; */\r\n\t/* width: 50%;  */\r\n\tmin-height: 200px;\r\n\t\r\n}\r\n\r\n#yourField {\r\n\tmin-height: 200px;\r\n}\r\n\r\n#botField {\r\n\tmin-height: 200px;\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n}\r\n\r\n.yourPointCard {\r\n\t/* height: 80%; */\r\n\t/* margin-top: 1%;\r\n\t/* margin-left: 1%; */\r\n\tdisplay: inline-block;\r\n}\r\n\r\n.pointCardImg {\r\n\tdisplay: inline-block;\r\n\t/* position: relative; */\r\n\t/* height: 100%; */\r\n\tmax-height: 200px;\r\n}\r\n\r\n.jack {\r\n\t/* display: block; */\r\n    /* position: fixed; */\r\n\tmax-height: 200px;\r\n\tposition: relative;\r\n\tmargin-left: -90px;\r\n\tmargin-right: 10px;\r\n\r\n    /* top: -104%; */\r\n    /* left: 7%; */\r\n}\r\n\r\n.legalMove {\r\n\t/* min-height: 100%; */\r\n\tbackground-color: rgb(91, 194, 69);\r\n}\r\n\r\n.validTarget {\r\n\tborder: 2px solid rgb(91, 194, 69);\r\n}"
+module.exports = ".flex-all {\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n\tjustify-content: left;;\r\n}\r\n\r\n.flex-container {\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\talign-items: center;\r\n\r\n}\r\n\r\n.flex1 {\r\n\theight: 15%;\r\n}\r\n\r\n#side {\r\n\tdisplay: flex;\r\n\tflex-direction: column;\r\n\tmargin: auto 10px;\r\n}\r\n\r\n#undo {\r\n    /* position: absolute; */\r\n\tdisplay: inline-block;\r\n\theight: 8%;\r\n    max-height: 64px;\r\n}\r\n\r\n#botHand, #yourHand {\r\n\t/* position: absolute; */\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n\twidth: 80%;\r\n\t/* height: 15%; */\r\n\t/* top: 10%; */\r\n}\r\n\r\n#indicator {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size: 2em;\r\n}\r\n\r\n/* #yourHand { */\r\n\r\n/* position: absolute; */\r\n\r\n/* display: block; */\r\n\r\n/* width: 100%; */\r\n\r\n/* max-height: 200px;\r\n\twidth: 80%;\r\n\theight: 15%; */\r\n\r\n/* bottom: 10%; */\r\n\r\n/* } */\r\n\r\n#deck {\r\n\t/* position: absolute; */\r\n\t/* display: inline-block; */\r\n\theight: 20%;\r\n\t/* top: 28%; */\r\n\t/* margin-left: 2%; */\r\n}\r\n\r\n#scrap {\r\n\t/* position: absolute; */\r\n\t/* display: inline-block; */\r\n\theight: 20%;\r\n\t/* top: 49%; */\r\n\r\n}\r\n\r\n#field {\r\n\tposition: relative;\r\n\tjustify-content: center;\r\n\t/* display: inline-block; */\r\n\tborder: 2px solid black;\r\n\tmin-width: 1200px;\r\n\twidth: 100%;\r\n\tmin-height: 400px;\r\n\tmax-height: 600px;\r\n\r\n}\r\n\r\n.field {\r\n\t/* display: block; */\r\n\tposition: relative;\r\n\theight: 50%;\r\n}\r\n\r\n.fieldArea {\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\t/* height: 100%; */\r\n\t/* width: 50%;  */\r\n\tmin-height: 200px;\r\n\t\r\n}\r\n\r\n#yourField {\r\n\tmin-height: 200px;\r\n}\r\n\r\n#botField {\r\n\tmin-height: 200px;\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n}\r\n\r\n.yourPointCard {\r\n\t/* height: 80%; */\r\n\t/* margin-top: 1%;\r\n\t/* margin-left: 1%; */\r\n\tdisplay: inline-block;\r\n}\r\n\r\n.pointCardImg {\r\n\tdisplay: inline-block;\r\n\t/* position: relative; */\r\n\t/* height: 100%; */\r\n\tmax-height: 200px;\r\n}\r\n\r\n.jack {\r\n\t/* display: block; */\r\n    /* position: fixed; */\r\n\tmax-height: 200px;\r\n\tposition: relative;\r\n\tmargin-left: -90px;\r\n\tmargin-right: 10px;\r\n\r\n    /* top: -104%; */\r\n    /* left: 7%; */\r\n}\r\n\r\n.legalMove {\r\n\t/* min-height: 100%; */\r\n\tbackground-color: rgb(91, 194, 69);\r\n}\r\n\r\n.validTarget {\r\n\tborder: 3px solid rgb(91, 194, 69);\r\n}\r\n\r\n/*Scrap view overlaying field*/\r\n\r\napp-scrap-view {\r\n\tposition: absolute;\r\n\tdisplay: block;\r\n\theight: 100%;\r\n\twidth: 100%;\r\n\tbackground-color: #FFF;\r\n\tz-index: 3;\r\n}\r\n\r\napp-deck-view {\r\n\tposition: absolute;\r\n\tdisplay: block;\r\n\theight: 100%;\r\n\twidth: 50%;\r\n\tmargin-left: 50%;\r\n\tbackground-color: #FFF;\r\n\tz-index: 3;\r\n}\r\n\r\n#revealedDeck {\r\n\tdisplay: block;\r\n\tposition: absolute;\r\n\theight: 100%;\r\n\ttop: 120%;\r\n}\r\n\r\n.revealedDeckCard {\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\theight: 10%;\r\n}"
 
 /***/ }),
 
@@ -149,7 +155,7 @@ module.exports = ".flex-all {\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<img id=\"undo\" src=\"assets/back-arrow.png\" (click)=\"undo()\">\r\n\r\n<div class=\"flex-all\">\r\n\t<div id=\"side\">\r\n\t\t<img src=\"assets/deck.jpg\" id=\"deck\" (click)=\"draw()\">\r\n\t\t<img src=\"assets/scrap.jpg\" id=\"scrap\">\r\n\t</div>\r\n\r\n\t<div class=\"flex-container\">\r\n\r\n\t\t<!-- <div class=\"flex-container flex1\"> -->\r\n\t\t<app-hand id=\"botHand\" [player]=\"game.players[0]\"></app-hand>\r\n\t\t<!-- </div> -->\r\n\r\n\r\n\t\t<div id=\"field\">\r\n\t\t\t<div id=\"botField\" class=\"field\">\r\n\t\t\t\t<div id=\"botPoints\" class=\"fieldArea\">\r\n\t\t\t\t\t<div *ngFor=\"let card of game.bot.points index as index\" class=\"yourPointCard\">\r\n\t\t\t\t\t\t<img src=\"assets/cards/{{card.img}}\" [ngClass]=\"{'validTarget': gameService.validTargets.indexOf(card) > -1}\"\r\n\t\t\t\t\t\t (click)=\"targetPoint(card, index)\" class=\"pointCardImg\">\r\n\t\t\t\t\t\t<img *ngFor=\"let jack of card.jacks index as jackIndex\" src=\"assets/cards/{{jack.img}}\" class=\"jack\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div id=\"botFaceCards\" class=\"fieldArea\">\r\n\t\t\t\t\t<img *ngFor=\"let card of game.bot.faceCards\" src=\"assets/cards/{{card.img}}\" class=\"pointCardImg\" [ngClass]=\"{'validTarget': gameService.validTargets.indexOf(card) > -1}\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div id=\"yourField\" class=\"field\" [ngClass]=\"{'legalMove': gs.legalMoves.indexOf('field') > -1}\" (click)='playToField()'>\r\n\t\t\t\t<div id=\"yourPoints\" class=\"fieldArea\">\r\n\r\n\t\t\t\t\t<div *ngFor=\"let card of game.player.points\" class=\"yourPointCard\">\r\n\t\t\t\t\t\t<img src=\"assets/cards/{{card.img}}\" class=\"pointCardImg\">\r\n\t\t\t\t\t\t<img *ngFor=\"let jack of card.jacks\" src=\"assets/cards/{{jack.img}}\" class=\"jack\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div id=\"yourPointsFace\" class=\"fieldArea\">\r\n\t\t\t\t\t<img *ngFor=\"let card of game.player.faceCards\" src=\"assets/cards/{{card.img}}\" class=\"pointCardImg\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<app-hand id=\"yourHand\" [player]=\"game.players[1]\"></app-hand>\r\n\t\t<div id=\"indicator\">Victory requirements: {{game.player.remainingPointsNeededToWin}} points</div>\r\n\t</div>\r\n\r\n</div>"
+module.exports = "<img id=\"undo\" src=\"assets/back-arrow.png\" (click)=\"undo()\">\r\n\r\n<div class=\"flex-all\">\r\n\t<div id=\"side\">\r\n\t\t<img src=\"assets/deck.jpg\" id=\"deck\" (click)=\"draw()\">\r\n\t\t<img src=\"assets/scrap.jpg\" id=\"scrap\" (click)=\"untargetedOneOff()\" [ngClass]=\"{'validTarget': gs.selected &&  [1, 3, 4, 5, 6, 7].indexOf(gs.selected.rank) > -1}\">\r\n\t</div>\r\n\r\n\t<div class=\"flex-container\">\r\n\r\n\t\t<!-- <div class=\"flex-container flex1\"> -->\r\n\t\t<app-hand id=\"botHand\" [player]=\"game.players[0]\"></app-hand>\r\n\t\t<!-- </div> -->\r\n\r\n\r\n\t\t<div id=\"field\">\r\n\t\t\t<app-scrap-view *ngIf=\"gs.chooseScrap\"></app-scrap-view>\r\n\t\t\t<app-deck-view *ngIf=\"gs.chooseDeck\"></app-deck-view>\r\n\t\t\t<div id=\"botField\" class=\"field\">\r\n\t\t\t\t<div id=\"botPoints\" class=\"fieldArea\">\r\n\t\t\t\t\t<div *ngFor=\"let card of game.bot.points index as index\" class=\"yourPointCard\">\r\n\t\t\t\t\t\t<img src=\"assets/cards/{{card.img}}\" [ngClass]=\"{'validTarget': gameService.validTargets.indexOf(card) > -1}\"\r\n\t\t\t\t\t\t (click)=\"targetPoint(card, index)\" class=\"pointCardImg\">\r\n\t\t\t\t\t\t<img *ngFor=\"let jack of card.jacks index as jackIndex\" src=\"assets/cards/{{jack.img}}\" class=\"jack\" [ngClass]=\"{'validTarget': gameService.validTargets.indexOf(jack) > -1}\" (click)=\"targetedOneOffJack(card, index)\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div id=\"botFaceCards\" class=\"fieldArea\">\r\n\t\t\t\t\t<img *ngFor=\"let card of game.bot.faceCards\" src=\"assets/cards/{{card.img}}\" class=\"pointCardImg\" [ngClass]=\"{'validTarget': gameService.validTargets.indexOf(card) > -1}\" (click)=\"targetedOneOffFaces(card, index)\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\t\t\t<div id=\"yourField\" class=\"field\" [ngClass]=\"{'legalMove': gs.legalMoves.indexOf('field') > -1}\" (click)='playToField()'>\r\n\t\t\t\t<div id=\"yourPoints\" class=\"fieldArea\">\r\n\r\n\t\t\t\t\t<div *ngFor=\"let card of game.player.points\" class=\"yourPointCard\">\r\n\t\t\t\t\t\t<img src=\"assets/cards/{{card.img}}\" class=\"pointCardImg\">\r\n\t\t\t\t\t\t<img *ngFor=\"let jack of card.jacks\" src=\"assets/cards/{{jack.img}}\" class=\"jack\">\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div id=\"yourPointsFace\" class=\"fieldArea\">\r\n\t\t\t\t\t<img *ngFor=\"let card of game.player.faceCards\" src=\"assets/cards/{{card.img}}\" class=\"pointCardImg\">\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<app-hand id=\"yourHand\" [player]=\"game.players[1]\"></app-hand>\r\n\t\t<div id=\"indicator\">Victory requirements: {{game.player.remainingPointsNeededToWin}} points</div>\r\n\t\t<button (click)=\"showDeck = !showDeck\">Toggle Deck</button>\r\n\t\t<div *ngIf=\"showDeck\" id=\"revealedDeck\">\r\n\t\t\t<img *ngFor=\"let card of game.deck index as index\" src=\"assets/cards/{{card.img}}\" class=\"revealedDeckCard\" (click)=\"stackDeck(index)\">\r\n\t\t</div>\r\n\t</div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -187,9 +193,13 @@ var BoardComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    BoardComponent.prototype.getGame = function () {
-        this.game = this.gameService.game;
-    };
+    Object.defineProperty(BoardComponent.prototype, "game", {
+        get: function () {
+            return this.gameService.game;
+        },
+        enumerable: true,
+        configurable: true
+    });
     BoardComponent.prototype.draw = function () {
         // Check if you're under the hand limit
         if (this.game.player.hand.length < 8) {
@@ -199,66 +209,277 @@ var BoardComponent = /** @class */ (function () {
             gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
             // Add change to history and update game
             this.gameService.update(oldGame, gameCopy);
-            this.getGame();
             this.gameService.selected = null;
             this.gameService.selIndex = null;
         }
     };
     BoardComponent.prototype.playToField = function () {
         if (this.gameService.selected) {
-            // Play for points
             var oldGame = this.game.copy();
             var gameCopy = this.game.copy();
-            if (this.gameService.selected.rank <= 10) {
-                // Move card to points
-                gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-                gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-                // this.gameService.botBrain.decideLegalMoves(this.gameService.game);
-                // Play face card
+            // Playing card from your hand
+            if (!this.gameService.chooseDeck) {
+                if (this.gameService.selected.rank <= 10) {
+                    // Move card to points
+                    gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+                }
+                else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
+                    // Play face card
+                    gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+                }
+                // Playing card from deck using a 7
             }
-            else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
-                // var oldGame = this.game.copy();
-                // var gameCopy = this.game.copy();
-                gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-                gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+            else {
+                if (this.gameService.selected.rank <= 10) {
+                    gameCopy.player.points.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+                }
+                else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
+                    gameCopy.player.faceCards.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+                }
+                this.gameService.chooseDeck = false;
+                gameCopy.scrap.push(this.game.oneOff);
+                gameCopy.oneOff = null;
             }
-            // Update game
-            this.gameService.update(oldGame, gameCopy);
-            this.getGame();
             // Delete selection
             this.gameService.selected = null;
             this.gameService.selIndex = null;
+            // Update game
+            gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+            this.gameService.update(oldGame, gameCopy);
         }
     };
     BoardComponent.prototype.targetPoint = function (card, index) {
         // Scuttle
         var gameCopy = this.game.copy();
         var oldGame = this.game.copy();
-        if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
-            gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
-            gameCopy.bot.points[index].jacks = [];
-            gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
-            gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-            gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+        // Playing card from hand
+        if (!this.gameService.chooseDeck) {
+            // Scuttling
+            if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
+                gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
+                gameCopy.bot.points[index].jacks = [];
+                gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
+                gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+                // Playing Jack
+            }
+            else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
+                gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+                gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+            }
+            // playing card from deck with 7
         }
-        else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
-            gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-            gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
-            gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+        else {
+            // Scuttling
+            if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
+                gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
+                gameCopy.bot.points[index].jacks = [];
+                gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
+                gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+                // Playing Jack
+            }
+            else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
+                gameCopy.bot.points[index].jacks.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+                gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+            }
+            gameCopy.scrap.push(gameCopy.oneOff);
+            gameCopy.oneOff = null;
+            gameCopy.selIndex = null;
+            this.gameService.chooseDeck = false;
         }
+        gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
         // Update game
         this.gameService.update(oldGame, gameCopy);
-        this.getGame();
         // Delete selection
         this.gameService.selected = null;
         this.gameService.selIndex = null;
     };
+    BoardComponent.prototype.targetedOneOffFaces = function (card, index) {
+        // not including eights yet
+        var gameCopy = this.game.copy();
+        var oldGame = this.game.copy();
+        if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1) {
+            switch (this.gameService.selected.rank) {
+                case 2:
+                    gameCopy.scrap.push(gameCopy.bot.faceCards.splice(index, 1)[0]);
+                    if (this.gameService.chooseDeck) {
+                        gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+                        this.gameService.chooseDeck = false;
+                    }
+                    else {
+                        gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+                    }
+                    break;
+                case 9:
+                    break;
+            }
+        }
+        gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+        this.gameService.update(oldGame, gameCopy);
+        // Delete selection
+        this.gameService.selected = null;
+        this.gameService.selIndex = null;
+    };
+    BoardComponent.prototype.targetedOneOffJack = function (card, index) {
+        var gameCopy = this.game.copy();
+        var oldGame = this.game.copy();
+        if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1 && card.jacks.length >= 1) {
+            switch (this.gameService.selected.rank) {
+                case 2:
+                    gameCopy.scrap.push(gameCopy.bot.points[index].jacks.shift());
+                    gameCopy.player.points.push(gameCopy.bot.points[index]);
+                    gameCopy.bot.points.splice(index, 1);
+                    if (this.gameService.chooseDeck) {
+                        gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+                        gameCopy.scrap.push(gameCopy.oneOff);
+                        gameCopy.oneOff = null;
+                        this.gameService.chooseDeck = false;
+                    }
+                    else {
+                        gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+                    }
+                    break;
+                case 9:
+                    break;
+            }
+            gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+        }
+        this.gameService.update(oldGame, gameCopy);
+        // Delete selection
+        this.gameService.selected = null;
+        this.gameService.selIndex = null;
+    };
+    BoardComponent.prototype.untargetedOneOff = function () {
+        if (this.gameService.selected && [1, 3, 4, 5, 6, 7].indexOf(this.gameService.selected.rank) > -1) {
+            var gameCopy = this.game.copy();
+            var oldGame = this.game.copy();
+            var done = true;
+            var previouslyPlayedSeven = false;
+            this.gameService.chooseDeck = false;
+            if (gameCopy.oneOff && gameCopy.oneOff.rank == 7)
+                previouslyPlayedSeven = true;
+            switch (this.gameService.selected.rank) {
+                // Destroy all Points and attached jacks
+                case 1:
+                    gameCopy.player.points.forEach(function (point) {
+                        console.log("scrapping: your" + point.name + ". Removed jacks:");
+                        gameCopy.scrap = gameCopy.scrap.concat(point.jacks);
+                        console.log(gameCopy.scrap);
+                        point.jacks = [];
+                        gameCopy.scrap.push(point);
+                    });
+                    gameCopy.player.points = [];
+                    gameCopy.bot.points.forEach(function (point) {
+                        console.log("scrapping bot's: " + point.name + ". Removed jacks:");
+                        gameCopy.scrap = gameCopy.scrap.concat(point.jacks);
+                        console.log(gameCopy.scrap);
+                        point.jacks = [];
+                        gameCopy.scrap.push(point);
+                    });
+                    gameCopy.bot.points = [];
+                    break;
+                // Fetch one card from scrap pile
+                case 3:
+                    this.gs.chooseScrap = true;
+                    done = false;
+                    break;
+                case 4:
+                    gameCopy.scrap.push(gameCopy.bot.hand.pop());
+                    gameCopy.scrap.push(gameCopy.bot.hand.pop());
+                    console.log(gameCopy.scrap);
+                    var firstDiscard = gameCopy.scrap[gameCopy.scrap.length - 2].name;
+                    var secondDiscard = gameCopy.scrap[gameCopy.scrap.length - 1].name;
+                    alert("Cuttle Bot discards the " + firstDiscard + " and the " + secondDiscard);
+                    break;
+                case 5:
+                    // gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+                    gameCopy.player.hand.push(gameCopy.deck.shift());
+                    if (gameCopy.player.hand.length < 8) {
+                        gameCopy.player.hand.push(gameCopy.deck.shift());
+                    }
+                    break;
+                case 6:
+                    gameCopy.player.faceCards.forEach(function (faceCard) {
+                        gameCopy.scrap.push(faceCard);
+                    });
+                    gameCopy.player.faceCards = [];
+                    gameCopy.bot.faceCards.forEach(function (faceCard) {
+                        gameCopy.scrap.push(faceCard);
+                    });
+                    gameCopy.bot.faceCards = [];
+                    // Remove jacks and determine which point cards must be exchanged
+                    var indicesToMove_1 = [];
+                    gameCopy.player.points.forEach(function (point, index) {
+                        if (point.jacks.length % 2 != 0) {
+                            indicesToMove_1.push(index);
+                        }
+                        gameCopy.scrap = gameCopy.scrap.concat(point.jacks);
+                        point.jacks = [];
+                    });
+                    // Switch any points from player to bot
+                    while (indicesToMove_1.length > 0) {
+                        var index = indicesToMove_1.pop();
+                        gameCopy.bot.points.push(gameCopy.player.points.splice(index, 1)[0]);
+                    }
+                    gameCopy.bot.points.forEach(function (point, index) {
+                        if (point.jacks.length % 2 != 0) {
+                            indicesToMove_1.push(index);
+                        }
+                        gameCopy.scrap = gameCopy.scrap.concat(point.jacks);
+                        point.jacks = [];
+                    });
+                    // Switch any points from bot to player
+                    while (indicesToMove_1.length > 0) {
+                        var index = indicesToMove_1.pop();
+                        gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+                    }
+                    break;
+                case 7:
+                    this.gs.chooseDeck = true;
+                    done = false;
+                    break;
+                default:
+                    // code...
+                    break;
+            }
+            if (done) {
+                if (!this.gameService.chooseDeck) {
+                    // Move played card from hand to scrap
+                    gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+                }
+                else {
+                    gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+                    gameCopy.oneOff = null;
+                    this.gameService.chooseDeck = false;
+                }
+                // Bot move
+                gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+            }
+            else {
+                if (!previouslyPlayedSeven) {
+                    gameCopy.oneOff = gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0];
+                }
+                else {
+                    gameCopy.scrap.push(gameCopy.oneOff);
+                    gameCopy.oneOff = gameCopy.deck.splice(this.gameService.selIndex, 1)[0];
+                }
+                this.gameService.gameCopy = gameCopy;
+                this.gameService.oldGameCopy = oldGame;
+            }
+            // Update game
+            this.gameService.update(oldGame, gameCopy);
+            // Delete selection
+            this.gameService.selected = null;
+            this.gameService.selIndex = null;
+        }
+    };
     BoardComponent.prototype.undo = function () {
         this.gameService.undo();
-        this.getGame();
+    };
+    BoardComponent.prototype.stackDeck = function (index) {
+        this.game.deck.unshift(this.game.deck.splice(index, 1)[0]);
     };
     BoardComponent.prototype.ngOnInit = function () {
-        this.getGame();
+        this.showDeck = false;
     };
     BoardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -316,7 +537,7 @@ var Bot = /** @class */ (function () {
                     if (card.rank > target.rank || (card.rank == target.rank && card.suit > target.suit)) {
                         var scuttle_copy = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(game);
                         scuttle_copy.scrap = scuttle_copy.scrap.concat(target.jacks);
-                        scuttle_copy.player.points[targetIndex] = [];
+                        scuttle_copy.player.points[targetIndex].jacks = [];
                         scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
                         scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
                         possibleMoves.push(new _move__WEBPACK_IMPORTED_MODULE_0__["Move"]("scuttle", scuttle_copy, card, index, target, targetIndex));
@@ -397,6 +618,9 @@ var Bot = /** @class */ (function () {
             case "jack":
                 announcement = "Cuttle Bot steals your " + best_move.target.name + " with its " + best_move.card.name;
                 break;
+            case "oneOff":
+                announcement = "Cuttle Bot plays the " + best_move.card.name + " for one-off effects";
+                break;
             default:
                 // code...
                 break;
@@ -414,11 +638,17 @@ var Bot = /** @class */ (function () {
                 game.bot.points.push(game.bot.hand.splice(move.index, 1)[0]);
                 break;
             case "scuttle":
+                console.log("Bot is scuttling");
                 game.scrap.push(game.bot.hand.splice(move.index)[0]);
+                console.log("Bot's card scrapped");
+                console.log(game.scrap);
                 game.scrap.push(game.player.hand.splice(move.target_index)[0]);
+                console.log("your card scrapped");
+                console.log(game.scrap);
                 break;
             case "oneOff":
                 // A LOT!
+                // How do I implement one-off here???
                 break;
             case "faceCard":
                 game.bot.faceCards.push(game.bot.hand.splice(move.index, 1)[0]);
@@ -427,7 +657,6 @@ var Bot = /** @class */ (function () {
         return game;
     };
     Bot.prototype.suggestMove = function (initialGame, gameAfterPlayerMove) {
-        console.log(initialGame);
         var res = null;
         // Only consider suggesting move if player didn't win
         if (!gameAfterPlayerMove.player.isWinner) {
@@ -567,6 +796,89 @@ var Card = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/deck-view/deck-view.component.css":
+/*!***************************************************!*\
+  !*** ./src/app/deck-view/deck-view.component.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "h1 {\r\n\ttext-align: center;\r\n}\r\nimg {\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\theight: 40%;\r\n\tmargin-top: 3%;\r\n\tmargin-left: 1%;\r\n}\r\n#topCard {\r\n\tmargin-left: 34%;\r\n}\r\n.selected {\r\n\tborder: 2px solid green;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/deck-view/deck-view.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/deck-view/deck-view.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Choose one of the top two cards from the deck to play</h1>\r\n<img src=\"assets/cards/{{gameService.game.deck[0].img}}\" id=\"topCard\" (click)=\"clickDeckCard(0)\" [ngClass]=\"{'selected': gameService.game.deck[0] == selected}\">\r\n<img src=\"assets/cards/{{gameService.game.deck[1].img}}\" (click)=\"clickDeckCard(1)\" [ngClass]=\"{'selected': gameService.game.deck[1] == selected}\">"
+
+/***/ }),
+
+/***/ "./src/app/deck-view/deck-view.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/deck-view/deck-view.component.ts ***!
+  \**************************************************/
+/*! exports provided: DeckViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeckViewComponent", function() { return DeckViewComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _game_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game.service */ "./src/app/game.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DeckViewComponent = /** @class */ (function () {
+    function DeckViewComponent(gameService) {
+        this.gameService = gameService;
+    }
+    Object.defineProperty(DeckViewComponent.prototype, "selected", {
+        get: function () {
+            return this.gameService.selected;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DeckViewComponent.prototype.clickDeckCard = function (index) {
+        if (this.selected == this.gameService.game.deck[index]) {
+            this.gameService.selected = null;
+            this.gameService.selIndex = null;
+        }
+        else {
+            this.gameService.selected = this.gameService.game.deck[index];
+            this.gameService.selIndex = index;
+        }
+    };
+    DeckViewComponent.prototype.ngOnInit = function () {
+    };
+    DeckViewComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-deck-view',
+            template: __webpack_require__(/*! ./deck-view.component.html */ "./src/app/deck-view/deck-view.component.html"),
+            styles: [__webpack_require__(/*! ./deck-view.component.css */ "./src/app/deck-view/deck-view.component.css")]
+        }),
+        __metadata("design:paramtypes", [_game_service__WEBPACK_IMPORTED_MODULE_1__["GameService"]])
+    ], DeckViewComponent);
+    return DeckViewComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/game.service.ts":
 /*!*********************************!*\
   !*** ./src/app/game.service.ts ***!
@@ -600,6 +912,8 @@ var GameService = /** @class */ (function () {
         this.selIndex = null;
         this.selected = null;
         this.botBrain = new _bot__WEBPACK_IMPORTED_MODULE_1__["Bot"]();
+        this.chooseScrap = false;
+        this.chooseDeck = false;
     }
     Object.defineProperty(GameService.prototype, "legalMoves", {
         get: function () {
@@ -625,6 +939,16 @@ var GameService = /** @class */ (function () {
                         });
                         break;
                     case 2:
+                        moves.push("field");
+                        this.game.bot.points.forEach(function (card) {
+                            if (card.jacks.length >= 1) {
+                                _this.validTargets.push(card.jacks[card.jacks.length - 1]);
+                            }
+                        });
+                        this.game.bot.faceCards.forEach(function (card) {
+                            _this.validTargets.push(card);
+                        });
+                        break;
                     case 9:
                         // Determine legal scuttles
                         this.game.bot.points.forEach(function (card) {
@@ -682,6 +1006,7 @@ var GameService = /** @class */ (function () {
         configurable: true
     });
     GameService.prototype.update = function (oldGame, newGame) {
+        console.log(newGame);
         this.history.push(newGame);
         if (this.game.player.isWinner) {
             alert("You won! Way to go!");
@@ -1124,6 +1449,88 @@ var Player = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/scrap-view/scrap-view.component.css":
+/*!*****************************************************!*\
+  !*** ./src/app/scrap-view/scrap-view.component.css ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "h1 {\r\n\ttext-align: center;\r\n}\r\nimg {\r\n\tdisplay: inline-block;\r\n\tposition: relative;\r\n\theight: 40%;\r\n\tmargin-top: 3%;\r\n\tmargin-left: 1%;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/scrap-view/scrap-view.component.html":
+/*!******************************************************!*\
+  !*** ./src/app/scrap-view/scrap-view.component.html ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Choose a card from the scrap pile</h1>\r\n<img *ngFor=\"let card of gameService.game.scrap index as index\" src=\"assets/cards/{{card.img}}\" (click)=\"chooseCard(index)\">"
+
+/***/ }),
+
+/***/ "./src/app/scrap-view/scrap-view.component.ts":
+/*!****************************************************!*\
+  !*** ./src/app/scrap-view/scrap-view.component.ts ***!
+  \****************************************************/
+/*! exports provided: ScrapViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScrapViewComponent", function() { return ScrapViewComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _game_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game.service */ "./src/app/game.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ScrapViewComponent = /** @class */ (function () {
+    function ScrapViewComponent(gameService) {
+        this.gameService = gameService;
+    }
+    ScrapViewComponent.prototype.chooseCard = function (index) {
+        var gameCopy = this.gameService.gameCopy.copy();
+        var oldGame = this.gameService.oldGameCopy.copy();
+        // Move chosen card to player's hand
+        gameCopy.player.hand.push(gameCopy.scrap.splice(index, 1)[0]);
+        gameCopy.scrap.push(gameCopy.oneOff);
+        // Clear out temp data
+        gameCopy.oneOff = null;
+        this.gameService.gameCopy = null;
+        this.gameService.oldGameCopy = null;
+        this.gameService.chooseScrap = false;
+        // Make bot move
+        gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+        // Update game
+        this.gameService.update(oldGame, gameCopy);
+    };
+    ScrapViewComponent.prototype.ngOnInit = function () {
+    };
+    ScrapViewComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-scrap-view',
+            template: __webpack_require__(/*! ./scrap-view.component.html */ "./src/app/scrap-view/scrap-view.component.html"),
+            styles: [__webpack_require__(/*! ./scrap-view.component.css */ "./src/app/scrap-view/scrap-view.component.css")]
+        }),
+        __metadata("design:paramtypes", [_game_service__WEBPACK_IMPORTED_MODULE_1__["GameService"]])
+    ], ScrapViewComponent);
+    return ScrapViewComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/environments/environment.ts":
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
@@ -1184,7 +1591,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\METALS\Human-AI Interaction\Final Project\cuttle-angular-ai\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! E:\Metals\Sem 1\Human-AI Interaction\Final Project\cuttle-angular-ai\src\main.ts */"./src/main.ts");
 
 
 /***/ })

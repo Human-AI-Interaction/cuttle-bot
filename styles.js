@@ -539,7 +539,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\METALS\Human-AI Interaction\Final Project\cuttle-angular-ai\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! E:\Metals\Sem 1\Human-AI Interaction\Final Project\cuttle-angular-ai\src\styles.css */"./src/styles.css");
 
 
 /***/ })
