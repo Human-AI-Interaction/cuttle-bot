@@ -176,6 +176,9 @@ export class BoardComponent implements OnInit {
 			var gameCopy = this.game.copy();
 			let oldGame = this.game.copy();
 			let done = true;
+			let previouslyPlayedSeven = false;
+			this.gameService.chooseDeck = false;
+			if (gameCopy.oneOff && gameCopy.oneOff.rank == 7) previouslyPlayedSeven = true;
 			switch (this.gameService.selected.rank) {
 				// Destroy all Points and attached jacks
 				case 1:
@@ -267,16 +270,25 @@ export class BoardComponent implements OnInit {
 			}
 
 			if (done) {
-				// Move played card from hand to scrap
-				gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				if (!this.gameService.chooseDeck) {
+					// Move played card from hand to scrap
+					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				} else {
+					gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+					gameCopy.oneOff = null;
+					this.gameService.chooseDeck = false;
+				}
 				// Bot move
 				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-
-
 			}
 			// If player needs to take further action (3's and 7's), store current gamestate as temp
 			else {
-				gameCopy.oneOff = gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0];
+				if (!previouslyPlayedSeven) {
+					gameCopy.oneOff = gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0];
+				} else {
+					gameCopy.scrap.push(gameCopy.oneOff);
+					gameCopy.oneOff = gameCopy.deck.splice(this.gameService.selIndex, 1)[0];
+				}
 				this.gameService.gameCopy = gameCopy;
 				this.gameService.oldGameCopy = oldGame;
 			}
