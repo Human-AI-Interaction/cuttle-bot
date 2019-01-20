@@ -34,32 +34,35 @@ export class BoardComponent implements OnInit {
 	}
 
 	playToField() {
-		if (this.gameService.selected) {		
-			// Play for points
+		if (this.gameService.selected) {
 			var oldGame = this.game.copy();
 			var gameCopy = this.game.copy();
-			if (this.gameService.selected.rank <= 10) {
-				// Move card to points
-				gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-
-				// this.gameService.botBrain.decideLegalMoves(this.gameService.game);
-			// Play face card
-			} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
-				// var oldGame = this.game.copy();
-				// var gameCopy = this.game.copy();
-				gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-
-				
+			// Playing card from your hand
+			if (!this.gameService.chooseDeck) {
+				if (this.gameService.selected.rank <= 10) {
+					// Move card to points
+					gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
+					// Play face card
+					gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);					
+				}
+			// Playing card from deck using a 7
+			} else {
+				if (this.gameService.selected.rank <= 10) {
+					gameCopy.player.points.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+				} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
+					gameCopy.player.faceCards.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+				}
+				this.gameService.chooseDeck = false;
+				gameCopy.scrap.push(this.game.oneOff);
+				gameCopy.oneOff = null;
 			}
-			
-			// Update game
-			this.gameService.update(oldGame, gameCopy);
-
 			// Delete selection
 			this.gameService.selected = null;
 			this.gameService.selIndex = null;
+			// Update game
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+			this.gameService.update(oldGame, gameCopy);
 		}
 	}
 
@@ -67,20 +70,38 @@ export class BoardComponent implements OnInit {
 		// Scuttle
 		var gameCopy = this.game.copy();
 		let oldGame = this.game.copy();
-		if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
-			gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
-			gameCopy.bot.points[index].jacks = [];
-			gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
-			gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-
-			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-
-
-		} else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
-			gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-			gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
-			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-		} 
+		// Playing card from hand
+		if (!this.gameService.chooseDeck) {
+			// Scuttling
+			if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
+				gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
+				gameCopy.bot.points[index].jacks = [];
+				gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
+				gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+			// Playing Jack
+			} else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
+				gameCopy.bot.points[index].jacks.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+			} 
+		// playing card from deck with 7
+		} else {
+			// Scuttling
+			if (this.gameService.selected.rank <= 10 && this.gameService.selected.rank > card.rank || (this.gameService.selected.rank == card.rank && this.gameService.selected.suit > card.suit)) {
+				gameCopy.scrap = gameCopy.scrap.concat(gameCopy.bot.points[index].jacks);
+				gameCopy.bot.points[index].jacks = [];
+				gameCopy.scrap.push(gameCopy.bot.points.splice(index, 1)[0]);
+				gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+			// Playing Jack
+			} else if (this.gameService.selected.rank == 11 && this.gameService.game.bot.numQueens == 0) {
+				gameCopy.bot.points[index].jacks.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+				gameCopy.player.points.push(gameCopy.bot.points.splice(index, 1)[0]);
+			}
+			gameCopy.scrap.push(gameCopy.oneOff);
+			gameCopy.oneOff = null;
+			gameCopy.selIndex = null;
+			this.gameService.chooseDeck = false;
+		}
+		gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 		// Update game
 		this.gameService.update(oldGame, gameCopy);
 
@@ -91,7 +112,6 @@ export class BoardComponent implements OnInit {
 	}
 
 	targetedOneOffFaces(card, index) {
-		console.log("targeting 2 to other face cards");
 
 		// not including eights yet
 		var gameCopy = this.game.copy();
@@ -101,8 +121,12 @@ export class BoardComponent implements OnInit {
 			switch (this.gameService.selected.rank) {
 				case 2:
 					gameCopy.scrap.push( gameCopy.bot.faceCards.splice(index, 1)[0]);
-					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-
+					if (this.gameService.chooseDeck) {
+						gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+						this.gameService.chooseDeck = false;
+					} else {
+						gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+					}
 					break;
 				case 9:
 					break;
@@ -124,19 +148,21 @@ export class BoardComponent implements OnInit {
 		var gameCopy = this.game.copy();
 		let oldGame = this.game.copy();
 
-		console.log(card.rank);
-
 		if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1 && card.jacks.length >= 1) {
 			switch (this.gameService.selected.rank) {
 				case 2:
-					console.log("using 2 for targeted on off");
 					gameCopy.scrap.push(gameCopy.bot.points[index].jacks.shift());
-
 					gameCopy.player.points.push(gameCopy.bot.points[index]);
 					gameCopy.bot.points.splice(index, 1);
-
-					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-
+					if (this.gameService.chooseDeck) {
+						gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+						gameCopy.scrap.push(gameCopy.oneOff);
+						gameCopy.oneOff = null;
+						this.gameService.chooseDeck = false;
+					}
+					else {
+						gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+					}
 					break;
 				case 9:
 					break;
@@ -156,6 +182,9 @@ export class BoardComponent implements OnInit {
 			var gameCopy = this.game.copy();
 			let oldGame = this.game.copy();
 			let done = true;
+			let previouslyPlayedSeven = false;
+			this.gameService.chooseDeck = false;
+			if (gameCopy.oneOff && gameCopy.oneOff.rank == 7) previouslyPlayedSeven = true;
 			switch (this.gameService.selected.rank) {
 				// Destroy all Points and attached jacks
 				case 1:
@@ -238,6 +267,8 @@ export class BoardComponent implements OnInit {
 					}
 					break;
 				case 7:
+					this.gs.chooseDeck = true;
+					done = false;
 					break;
 				default:
 					// code...
@@ -245,16 +276,25 @@ export class BoardComponent implements OnInit {
 			}
 
 			if (done) {
-				// Move played card from hand to scrap
-				gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				if (!this.gameService.chooseDeck) {
+					// Move played card from hand to scrap
+					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+				} else {
+					gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+					gameCopy.oneOff = null;
+					this.gameService.chooseDeck = false;
+				}
 				// Bot move
 				gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
-
-
 			}
 			// If player needs to take further action (3's and 7's), store current gamestate as temp
 			else {
-				gameCopy.oneOff = gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0];
+				if (!previouslyPlayedSeven) {
+					gameCopy.oneOff = gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0];
+				} else {
+					gameCopy.scrap.push(gameCopy.oneOff);
+					gameCopy.oneOff = gameCopy.deck.splice(this.gameService.selIndex, 1)[0];
+				}
 				this.gameService.gameCopy = gameCopy;
 				this.gameService.oldGameCopy = oldGame;
 			}

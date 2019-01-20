@@ -148,6 +148,16 @@ app-scrap-view {
 	z-index: 3;
 }
 
+app-deck-view {
+	position: absolute;
+	display: block;
+	height: 100%;
+	width: 50%;
+	margin-left: 50%;
+	background-color: #FFF;
+	z-index: 3;
+}
+
 #revealedDeck {
 	display: block;
 	position: absolute;
