@@ -43,16 +43,15 @@ export class GameService {
 					break;
 
 				case 2:
+					moves.push("field");
 					this.game.bot.points.forEach(card => {
 						if(card.jacks.length >= 1){
-							console.log(card.jacks.length - 1);
 							this.validTargets.push(card.jacks[card.jacks.length - 1]);
 						}
 					});
 
 					this.game.bot.faceCards.forEach(card => {
 						this.validTargets.push(card);
-						console.log(this.validTargets);
 					});
 
 					break;

@@ -121,8 +121,12 @@ export class BoardComponent implements OnInit {
 			switch (this.gameService.selected.rank) {
 				case 2:
 					gameCopy.scrap.push( gameCopy.bot.faceCards.splice(index, 1)[0]);
-					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-
+					if (this.gameService.chooseDeck) {
+						gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+						this.gameService.chooseDeck = false;
+					} else {
+						gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+					}
 					break;
 				case 9:
 					break;
@@ -144,19 +148,21 @@ export class BoardComponent implements OnInit {
 		var gameCopy = this.game.copy();
 		let oldGame = this.game.copy();
 
-		console.log(card.rank);
-
 		if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1 && card.jacks.length >= 1) {
 			switch (this.gameService.selected.rank) {
 				case 2:
-					console.log("using 2 for targeted on off");
 					gameCopy.scrap.push(gameCopy.bot.points[index].jacks.shift());
-
 					gameCopy.player.points.push(gameCopy.bot.points[index]);
 					gameCopy.bot.points.splice(index, 1);
-
-					gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-
+					if (this.gameService.chooseDeck) {
+						gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+						gameCopy.scrap.push(gameCopy.oneOff);
+						gameCopy.oneOff = null;
+						this.gameService.chooseDeck = false;
+					}
+					else {
+						gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+					}
 					break;
 				case 9:
 					break;
