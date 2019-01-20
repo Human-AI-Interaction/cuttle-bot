@@ -113,7 +113,7 @@ export class BoardComponent implements OnInit {
 
 	targetedOneOffFaces(card, index) {
 
-		// not including eights yet
+		// not including eights as face cards yet
 		var gameCopy = this.game.copy();
 		let oldGame = this.game.copy();
 

@@ -14,3 +14,7 @@ img {
 .selected {
 	border: 2px solid green;
 }
+
+p {
+	width: 130px;
+}
