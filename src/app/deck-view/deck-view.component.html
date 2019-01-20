@@ -1,3 +1,0 @@
-<h1>Choose one of the top two cards from the deck to play</h1>
-<img src="assets/cards/{{gameService.game.deck[0].img}}" id="topCard" (click)="clickDeckCard(0)" [ngClass]="{'selected': gameService.game.deck[0] == selected}">
-<img src="assets/cards/{{gameService.game.deck[1].img}}" (click)="clickDeckCard(1)" [ngClass]="{'selected': gameService.game.deck[1] == selected}">
