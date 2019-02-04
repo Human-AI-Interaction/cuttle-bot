@@ -1,5 +1,5 @@
 <div *ngFor="let card of player.hand index as i">
 	<img *ngIf="player.isBot" src="assets/cardBack.png" class="card">
-	<img *ngIf="!player.isBot" src="assets/cards/{{card.img}}" class="card" (click)=clickCard(i) [ngClass]="{'selected': card == selected}" (mouseover)="displayTooltip(i)" (mouseout)="hideTooltip()">
+	<img *ngIf="!player.isBot" src="assets/cards/{{card.img}}" class="card" (click)=clickCard(i) [ngClass]="{'selected': card == selected}" (mouseover)="displayTooltip(i)" (mouseout)="hideTooltip()" (mouseleave)="hideTooltip()">
   	<p *ngIf="showTooltip[i]">{{tooltip}}</p>
 </div>

@@ -23,8 +23,38 @@ p {
 	z-index: 4;
 	border-radius: 5px;
 	width: 130px;
+	margin-top: -75px;
 	padding: 5px 10px;
-	font-size: 1.15em;
+	font-size: 1em;
 	color: #039be5;
 	background-color: #CFD8DC;
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+	img {
+		position: relative;
+		display: inline-block;
+		/* height: 100%; */
+		max-height: 75px;
+	}
+
+	p {
+		display: flex;
+		z-index: 4;
+		border-radius: 5px;
+		width: 75px;
+		margin-top: -25px;
+		padding: 5px 10px;
+		font-size: 0.3em;
+		color: #039be5;
+		background-color: #CFD8DC;
+	}
+
+	
 }
