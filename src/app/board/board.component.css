@@ -1,7 +1,7 @@
 .flex-all {
 	display: flex;
 	flex-direction: row;
-	justify-content: left;;
+	justify-content: left;
 }
 
 .flex-container {
@@ -18,7 +18,10 @@
 #side {
 	display: flex;
 	flex-direction: column;
-	margin: auto 10px;
+	align-items: flex-start;
+	height: 80vh;
+	/*margin: 26vh 10px;*/
+	margin: 17% 2%; 
 }
 
 #undo {
@@ -64,6 +67,7 @@
 	/* position: absolute; */
 	/* display: inline-block; */
 	height: 20%;
+	margin-top: 10%;
 	/* top: 49%; */
 
 }
@@ -77,7 +81,7 @@
 	border: 2px solid black;
 	min-width: 1200px;
 	width: 100%;
-	min-height: 400px;
+	min-height: 360px;
 	max-height: 600px;
 
 }
@@ -93,14 +97,14 @@
 	position: relative;
 	/* height: 100%; */
 	/* width: 50%;  */
-	min-height: 200px;
+	min-height: 180px;
 	
 }
 #yourField {
-	min-height: 200px;
+	min-height: 180px;
 }
 #botField {
-	min-height: 200px;
+	min-height: 180px;
 	display: flex;
 	flex-direction: row;
 }
@@ -115,13 +119,13 @@
 	display: inline-block;
 	/* position: relative; */
 	/* height: 100%; */
-	max-height: 200px;
+	max-height: 180px;
 }
 
 .jack {
 	/* display: block; */
     /* position: fixed; */
-	max-height: 200px;
+	max-height: 180px;
 	position: relative;
 	margin-left: -90px;
 	margin-right: 10px;

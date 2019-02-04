@@ -3,14 +3,28 @@ div {
 	display: inline-block;
 	/* height: 100%; */
 	margin-left: 2%;
+	margin-top: 2%;
+	margin-bottom: 2%;
 }
 img {
 	position: relative;
 	display: inline-block;
 	/* height: 100%; */
-	max-height: 200px;
+	max-height: 160px;
 }
 
 .selected {
 	border: 2px solid green;
+}
+
+p {
+	display: block;
+	position: absolute;
+	z-index: 4;
+	border-radius: 5px;
+	width: 130px;
+	padding: 5px 10px;
+	font-size: 1.15em;
+	color: #039be5;
+	background-color: #CFD8DC;
 }

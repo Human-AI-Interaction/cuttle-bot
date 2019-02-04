@@ -26,7 +26,7 @@ export class ScrapViewComponent implements OnInit {
 	}
 
 
-	constructor(private gameService: GameService) { }
+	constructor(public gameService: GameService) { }
 
 	ngOnInit() {
 	}

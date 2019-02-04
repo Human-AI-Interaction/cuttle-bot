@@ -113,7 +113,7 @@ export class BoardComponent implements OnInit {
 
 	targetedOneOffFaces(card, index) {
 
-		// not including eights yet
+		// not including eights as face cards yet
 		var gameCopy = this.game.copy();
 		let oldGame = this.game.copy();
 
@@ -317,7 +317,7 @@ export class BoardComponent implements OnInit {
 	}
 
 
-	constructor(private gameService: GameService) {}
+	constructor(public gameService: GameService) {}
 
 	ngOnInit() {
 		this.showDeck = false;
