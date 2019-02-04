@@ -317,7 +317,7 @@ export class BoardComponent implements OnInit {
 	}
 
 
-	constructor(private gameService: GameService) {}
+	constructor(public gameService: GameService) {}
 
 	ngOnInit() {
 		this.showDeck = false;

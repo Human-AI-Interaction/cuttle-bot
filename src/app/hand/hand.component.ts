@@ -13,7 +13,7 @@ export class HandComponent implements OnInit {
 	showTooltip: Array<boolean>;
 	tooltip: string;
 	@Input() player: Player;
-	constructor(private gameService: GameService) { 
+	constructor(public gameService: GameService) { 
 		this.tooltip = '';
 		this.showTooltip = [];
 	}
