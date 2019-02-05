@@ -2,6 +2,7 @@ export class Card {
 	suit: number;
 	rank: number;
 	jacks: Card[];
+	frozen: Boolean;
 
 	get img(): string {
 		return `card_${this.suit}_${this.rank}.png`;
@@ -43,6 +44,7 @@ export class Card {
 	constructor(suit: number, rank: number) {
 		this.suit = suit;
 		this.rank = rank;
+		this.frozen = false;
 		this.jacks = new Array<Card>();
 	}
 }

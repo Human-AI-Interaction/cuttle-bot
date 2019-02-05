@@ -31,6 +31,9 @@ export class Move {
     }
 
     constructor(name, game, card?, index?, target?, target_index?) {
+        game.bot.hand.forEach(card => {
+            card.frozen = false;
+        });
         this.name = name;
         this.game = game;
         this.card = card;

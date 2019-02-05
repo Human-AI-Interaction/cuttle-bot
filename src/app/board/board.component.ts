@@ -29,6 +29,8 @@ export class BoardComponent implements OnInit {
 			this.gameService.update(oldGame, gameCopy);
 			this.gameService.selected = null;
 			this.gameService.selIndex = null;
+		} else {
+			alert("You have reached the hand limit of 8 cards. You must play a card from your hand.");
 		}
 	}
 
@@ -116,24 +118,25 @@ export class BoardComponent implements OnInit {
 		var gameCopy = this.game.copy();
 		let oldGame = this.game.copy();
 
-		if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1) {
+		if (this.gameService.selected && [2, 9].indexOf(this.gameService.selected.rank) > -1 && (this.game.bot.numQueens == 0 || (this.game.bot.numQueens == 1 && card.rank == 12))) {
 			switch (this.gameService.selected.rank) {
 				case 2:
 					gameCopy.scrap.push( gameCopy.bot.faceCards.splice(index, 1)[0]);
-					if (this.gameService.chooseDeck) {
-						gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
-						this.gameService.chooseDeck = false;
-					} else {
-						gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-					}
 					break;
 				case 9:
+					let movedCard = gameCopy.bot.faceCards.splice(index, 1)[0];
+					movedCard.frozen = true;
+					gameCopy.bot.hand.push(movedCard);
 					break;
-
 			}
+			if (this.gameService.chooseDeck) {
+				gameCopy.scrap.push(gameCopy.deck.splice(this.gameService.selIndex, 1)[0]);
+				this.gameService.chooseDeck = false;
+			} else {
+				gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+			}
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 		}
-
-		gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
 
 		this.gameService.update(oldGame, gameCopy);
 

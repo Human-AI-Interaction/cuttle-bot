@@ -44,18 +44,21 @@ export class GameService {
 
 				case 2:
 					moves.push("field");
+					// Jack targets
 					this.game.bot.points.forEach(card => {
-						if(card.jacks.length >= 1){
+						if(card.jacks.length >= 1 && (this.game.bot.numQueens == 0 || (this.game.bot.numQueens == 1 && card.rank == 12))){
 							this.validTargets.push(card.jacks[card.jacks.length - 1]);
 						}
 					});
-
+					// King and Queen targets
 					this.game.bot.faceCards.forEach(card => {
-						this.validTargets.push(card);
+						if (this.game.bot.numQueens == 0 || (this.game.bot.numQueens == 1 && card.rank == 12)) {
+ 							this.validTargets.push(card);
+						}
 					});
-
 					break;
 				case 9:
+					moves.push("field");
 					// Determine legal scuttles
 					this.game.bot.points.forEach(card => {
 						if (card.rank < this.selected.rank || (card.rank == this.selected.rank && card.suit <= this.selected.suit) ) {
@@ -63,8 +66,21 @@ export class GameService {
 							this.validTargets.push(card);
 						}
 					});
-					moves.push("field");
+
+					// Jack targets
+					this.game.bot.points.forEach(card => {
+						if(card.jacks.length >= 1){
+							this.validTargets.push(card.jacks[card.jacks.length - 1]);
+						}
+					});
+					// King and Queen targets
+					this.game.bot.faceCards.forEach(card => {
+						if (this.game.bot.numQueens == 0 || (this.game.bot.numQueens == 1 && card.rank == 12)) {
+							this.validTargets.push(card);
+						}
+					});
 					break;
+
 				case 8:
 					// Determine legal scuttles
 					this.game.bot.points.forEach(card => {

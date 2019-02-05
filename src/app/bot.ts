@@ -17,40 +17,42 @@ export class Bot {
 
 		// Play cards to field
 		game.bot.hand.forEach((card, index) => {
-			// Number cards
-			if (card.rank <= 10) {
-				// Playing the card as points
-				var play_points_game_copy = cloneDeep(game);
-				play_points_game_copy.bot.points.push(play_points_game_copy.bot.hand.splice(index, 1)[0]);
-				possibleMoves.push(new Move("points", play_points_game_copy, card, index));
+			if (!card.frozen) {
+				// Number cards
+				if (card.rank <= 10) {
+					// Playing the card as points
+					var play_points_game_copy = cloneDeep(game);
+					play_points_game_copy.bot.points.push(play_points_game_copy.bot.hand.splice(index, 1)[0]);
+					possibleMoves.push(new Move("points", play_points_game_copy, card, index));
 
-				// Check possible scuttles
-				game.player.points.forEach((target, targetIndex) => {
-					if (card.rank > target.rank || (card.rank == target.rank && card.suit > target.suit)) {
-						var scuttle_copy = cloneDeep(game);
-						scuttle_copy.scrap = scuttle_copy.scrap.concat(target.jacks);
-						scuttle_copy.player.points[targetIndex].jacks = [];
-						scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
-						scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
-						possibleMoves.push(new Move("scuttle", scuttle_copy, card, index , target, targetIndex));
-					}
-				});
-			} 
-			// Kings and Queens
-			else if (card.rank == 12 || card.rank == 13) {
-				var play_face_copy = cloneDeep(game);
-				play_face_copy.bot.faceCards.push(play_face_copy.bot.hand.splice(index, 1)[0]);
-				possibleMoves.push(new Move("faceCard", play_face_copy, card, index));
-			}
-			// Jacks
-			else  if (card.rank == 11) {
-				if (game.player.numQueens == 0) {
+					// Check possible scuttles
 					game.player.points.forEach((target, targetIndex) => {
-						var play_jack_copy = cloneDeep(game);
-						play_jack_copy.player.points[targetIndex].jacks.push(play_jack_copy.bot.hand.splice(index, 1)[0]);
-						play_jack_copy.bot.points.push(play_jack_copy.player.points.splice(targetIndex, 1)[0]);
-						possibleMoves.push(new Move("jack", play_jack_copy, card, index, target, targetIndex));
+						if (card.rank > target.rank || (card.rank == target.rank && card.suit > target.suit)) {
+							var scuttle_copy = cloneDeep(game);
+							scuttle_copy.scrap = scuttle_copy.scrap.concat(target.jacks);
+							scuttle_copy.player.points[targetIndex].jacks = [];
+							scuttle_copy.scrap.push(scuttle_copy.player.points.splice(targetIndex, 1)[0]); // Scrap player's point card
+							scuttle_copy.scrap.push(scuttle_copy.bot.hand.splice(index, 1)[0]); // Scrap bot's scuttling card
+							possibleMoves.push(new Move("scuttle", scuttle_copy, card, index , target, targetIndex));
+						}
 					});
+				} 
+				// Kings and Queens
+				else if (card.rank == 12 || card.rank == 13) {
+					var play_face_copy = cloneDeep(game);
+					play_face_copy.bot.faceCards.push(play_face_copy.bot.hand.splice(index, 1)[0]);
+					possibleMoves.push(new Move("faceCard", play_face_copy, card, index));
+				}
+				// Jacks
+				else  if (card.rank == 11) {
+					if (game.player.numQueens == 0) {
+						game.player.points.forEach((target, targetIndex) => {
+							var play_jack_copy = cloneDeep(game);
+							play_jack_copy.player.points[targetIndex].jacks.push(play_jack_copy.bot.hand.splice(index, 1)[0]);
+							play_jack_copy.bot.points.push(play_jack_copy.player.points.splice(targetIndex, 1)[0]);
+							possibleMoves.push(new Move("jack", play_jack_copy, card, index, target, targetIndex));
+						});
+					}
 				}
 			}
 		});
