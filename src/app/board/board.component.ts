@@ -18,7 +18,6 @@ export class BoardComponent implements OnInit {
 		return this.gameService.game;
 	}
 
-
 	draw() {
 		// Check if you're under the hand limit
 		if (this.game.player.hand.length < 8) {
@@ -44,7 +43,7 @@ export class BoardComponent implements OnInit {
 					gameCopy.player.points.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 				} else if (this.gameService.selected.rank == 12 || this.gameService.selected.rank == 13) {
 					// Play face card
-					gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);					
+					gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
 				}
 			// Playing card from deck using a 7
 			} else {
@@ -305,6 +304,23 @@ export class BoardComponent implements OnInit {
 			// Delete selection
 			this.gameService.selected = null;
 			this.gameService.selIndex = null;
+		}
+	}
+
+	playGlasses() {
+		if (this.gameService.selected && this.gameService.selected.rank == 8) {
+			var gameCopy = this.game.copy();
+			let oldGame = this.game.copy();
+
+			gameCopy.player.faceCards.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
+
+
+			// Delete selection
+			this.gameService.selected = null;
+			this.gameService.selIndex = null;
+			// Update game
+			gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+			this.gameService.update(oldGame, gameCopy);
 		}
 	}
 

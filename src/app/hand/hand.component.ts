@@ -25,6 +25,15 @@ export class HandComponent implements OnInit {
 		this.gameService.selected = card;
 	}
 
+	get hasGlasses() {
+		let res = false;
+		this.gameService.game.player.faceCards.forEach(card => {
+			if (card.rank == 8) res = true;
+		});
+		return res;
+	}
+
+
 	clickCard(index) {
 		// alert(index);
 		if (this.player.hand[index] != this.selected) {

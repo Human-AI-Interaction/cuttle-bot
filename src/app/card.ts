@@ -7,6 +7,23 @@ export class Card {
 		return `card_${this.suit}_${this.rank}.png`;
 	}
 
+	get faceImg(): string {
+		if (this.rank == 8) {
+			switch(this.suit) {
+				case 0:
+					return 'Glasses_Clubs.jpg';
+				case 1:
+					return 'Glasses_Diamonds.jpg';
+				case 2:
+					return 'Glasses_Hearts.jpg';
+				case 3:
+					return 'Glasses_Spades.jpg';
+			}
+		} else {
+			return `card_${this.suit}_${this.rank}.png`;		
+		}
+	}
+
 	get name(): string {
 		switch (this.suit) {
 			case 0:

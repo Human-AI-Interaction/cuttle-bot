@@ -9,7 +9,7 @@
 	<div class="flex-container">
 
 		<!-- <div class="flex-container flex1"> -->
-		<app-hand id="botHand" [player]="game.players[0]"></app-hand>
+		<app-hand id="botHand" [player]="game.players[0]" [ngClass]="{'legalMove': gs.selected && gs.selected.rank == 8}" (click)="playGlasses()"></app-hand>
 		<!-- </div> -->
 
 
@@ -38,7 +38,7 @@
 					</div>
 				</div>
 				<div id="yourPointsFace" class="fieldArea">
-					<img *ngFor="let card of game.player.faceCards" src="assets/cards/{{card.img}}" class="pointCardImg">
+					<img *ngFor="let card of game.player.faceCards" src="assets/cards/{{card.faceImg}}" class="pointCardImg">
 				</div>
 			</div>
 		</div>
