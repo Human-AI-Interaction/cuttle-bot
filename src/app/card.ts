@@ -27,19 +27,35 @@ export class Card {
 	get name(): string {
 		switch (this.suit) {
 			case 0:
-				return `${this.rank} of Clubs`;
+				return `${this.rank_name} of Clubs`;
 				// break;
 			case 1:
-				return `${this.rank} of Diamonds`;
+				return `${this.rank_name} of Diamonds`;
 				// break;
 			case 2:
-				return `${this.rank} of Hearts`;
+				return `${this.rank_name} of Hearts`;
 				// break;
 			default:
-				return `${this.rank} of Spades`;
+				return `${this.rank_name} of Spades`;
 				// break;
 		}
 	}
+
+	get rank_name(): string {
+		switch (this.rank) {
+			case 1:
+				return 'Ace';
+			case 11:
+				return 'Jack';
+			case 12:
+				return 'Queen';
+			case 13:
+				return 'King';
+			default:
+				return this.rank.toString();
+		}
+	}
+
 	constructor(suit: number, rank: number) {
 		this.suit = suit;
 		this.rank = rank;
