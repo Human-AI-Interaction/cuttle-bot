@@ -5,16 +5,24 @@
 	bottom: 0%;
 }
 
-@media only screen 
-and (min-device-width: 320px) 
+body {
+  background-image: url(./assets/background.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+@media only screen
+and (min-device-width: 320px)
 and (max-device-width: 812px)
 /* and (-webkit-min-device-pixel-ratio: 2) */
 and (orientation: landscape) {
 	body {
 		height: 375px;
-		max-height: 375px; 
+		max-height: 375px;
   }
-  
+
   #acknowledgements {
     /* position: absolute; */
     display: block;
