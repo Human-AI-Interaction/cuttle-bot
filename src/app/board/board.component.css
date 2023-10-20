@@ -17,8 +17,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 80vh;
-  margin: 17% 2%; 
+  margin: 220px 2%;
   width:15%;
   min-width: 125px;
 }
@@ -42,15 +41,13 @@
 
 
 #deck {
-	height: 20%;
+	height: 160px;
 }
 
 #scrap {
-	height: 20%;
+	height: 160px;
 	margin-top: 10%;
 }
-
-
 
 #field {
 	position: relative;
@@ -69,7 +66,7 @@
 	display: inline-block;
 	position: relative;
 	min-height: 180px;
-	
+
 }
 #yourField {
   min-height: 180px;
@@ -127,21 +124,19 @@ app-deck-view {
 
 #revealedDeck {
 	display: block;
-	position: absolute;
-	height: 100%;
 	top: 120%;
 }
 
 .revealedDeckCard {
 	display: inline-block;
 	position: relative;
-	height: 10%;
+	height: 160px;
 }
 
 
 /* Landscape */
-@media only screen 
-and (min-device-width: 320px) 
+@media only screen
+and (min-device-width: 320px)
 and (max-device-width: 812px)
 /* and (-webkit-min-device-pixel-ratio: 2) */
 and (orientation: landscape) {
@@ -151,7 +146,7 @@ and (orientation: landscape) {
     justify-content: center;
     margin: 0 auto;
   }
-  
+
   .flex-container {
     display: flex;
     flex-direction: column;
@@ -159,49 +154,49 @@ and (orientation: landscape) {
     width: 100%;
     margin-right: 5%;
   }
-  
+
   #side {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 65vh;
-    margin: 15% 2% 0 0; 
+    margin: 15% 2% 0 0;
     width: 10%;
     max-width: 75px;
     min-width: 50px;
   }
-  
+
   #undo {
     display: inline-block;
     position: absolute;
     height: 8%;
     max-height: 24px;
   }
-  
+
   #botHand, #yourHand {
     display: flex;
     justify-content: center;
     width: 80%;
     margin-right: 5%;
   }
-  
+
   #indicator {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2em;
   }
-  
-  
+
+
   #deck {
     height: 20%;
   }
-  
+
   #scrap {
     height: 20%;
     margin-top: 10%;
   }
-  
-  
-  
+
+
+
   #field {
     position: relative;
     justify-content: center;
@@ -210,8 +205,8 @@ and (orientation: landscape) {
     min-height: 140px;
     max-height: 150px;
   }
-  
-  
+
+
   .field {
     position: relative;
   }
@@ -219,7 +214,7 @@ and (orientation: landscape) {
     display: inline-block;
     position: relative;
     min-height: 90px;
-    
+
   }
   #yourField {
     min-height: 75px;
@@ -233,7 +228,7 @@ and (orientation: landscape) {
     display: flex;
     flex-direction: row;
   }
-  
+
   .yourPointCard {
     display: inline-block;
   }
@@ -241,21 +236,21 @@ and (orientation: landscape) {
     display: inline-block;
     max-height: 75px;
   }
-  
+
   .jack {
     max-height: 75px;
     position: relative;
     margin-left: -40px;
     margin-right: 10px;
   }
-  
+
   .legalMove {
     background-color: rgb(91, 194, 69);
   }
   .validTarget {
     border: 3px solid rgb(91, 194, 69);
   }
-  
+
   /*Scrap view overlaying field*/
   app-scrap-view {
     position: absolute;
@@ -265,7 +260,7 @@ and (orientation: landscape) {
     background-color: #FFF;
     z-index: 3;
   }
-  
+
   app-deck-view {
     position: absolute;
     display: block;
@@ -275,14 +270,14 @@ and (orientation: landscape) {
     background-color: #FFF;
     z-index: 3;
   }
-  
+
   #revealedDeck {
     display: block;
     position: absolute;
     height: 100%;
     top: 120%;
   }
-  
+
   .revealedDeckCard {
     display: inline-block;
     position: relative;
@@ -292,8 +287,8 @@ and (orientation: landscape) {
   #indicator {
     font-size: 12px;
   }
-  
-  
+
+
   #toggle {
     display: none;
   }
