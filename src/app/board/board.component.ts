@@ -220,11 +220,8 @@ export class BoardComponent implements OnInit {
 
 					break;
 				case 5:
-					// gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-					gameCopy.player.hand.push(gameCopy.deck.shift());
-					if (gameCopy.player.hand.length < 8) {
-						gameCopy.player.hand.push(gameCopy.deck.shift());
-					}
+					this.gs.chooseDiscard = true;
+					done = false;
 					break;
 				case 6:
 					gameCopy.player.faceCards.forEach(faceCard => {

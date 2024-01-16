@@ -1,0 +1,12 @@
+<h1>Choose a card to discard</h1>
+<img
+  *ngFor="let card of gameService.game.player.hand; index as index"
+  src="assets/cards/{{ card.img }}"
+  (click)="discardAndDraw(index)"
+/>
+<button
+  *ngIf="!gameService.game.player.hand.length"
+  (click)="discardAndDraw(index)"
+>
+  Draw
+</button>
