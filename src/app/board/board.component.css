@@ -1,72 +1,70 @@
 .flex-all {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   margin: 0 auto;
 }
 
 .flex-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   margin-right: 5%;
 }
 
 #side {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 220px 2%;
-  width:15%;
+  width: 15%;
   min-width: 125px;
 }
 
 #undo {
-	display: inline-block;
-	height: 8%;
+  display: inline-block;
+  height: 8%;
   max-height: 64px;
 }
 
-#botHand, #yourHand {
-	display: flex;
-	justify-content: center;
-	width: 80%;
+#botHand,
+#yourHand {
+  display: flex;
+  justify-content: center;
+  width: 80%;
 }
 
 #indicator {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 2em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2em;
 }
 
-
 #deck {
-	height: 160px;
+  height: 160px;
 }
 
 #scrap {
-	height: 160px;
-	margin-top: 10%;
+  height: 160px;
+  margin-top: 10%;
 }
 
 #field {
-	position: relative;
-	justify-content: center;
-	border: 2px solid black;
-	width: 100%;
-	min-height: 360px;
-	max-height: 600px;
+  position: relative;
+  justify-content: center;
+  border: 2px solid black;
+  width: 100%;
+  min-height: 360px;
+  max-height: 600px;
 }
-
 
 .field {
-	position: relative;
+  position: relative;
 }
 .fieldArea {
-	display: inline-block;
-	position: relative;
-	min-height: 180px;
-
+  display: inline-block;
+  position: relative;
+  min-height: 180px;
 }
 #yourField {
   min-height: 180px;
@@ -75,71 +73,74 @@
   flex-direction: row;
 }
 #botField {
-	min-height: 180px;
-	display: flex;
-	flex-direction: row;
+  min-height: 180px;
+  display: flex;
+  flex-direction: row;
 }
 
 .yourPointCard {
-	display: inline-block;
+  display: inline-block;
 }
 .pointCardImg {
-	display: inline-block;
-	max-height: 180px;
+  display: inline-block;
+  max-height: 180px;
 }
 
 .jack {
-	max-height: 180px;
-	position: relative;
-	margin-left: -90px;
-	margin-right: 10px;
+  max-height: 180px;
+  position: relative;
+  margin-left: -90px;
+  margin-right: 10px;
 }
 
 .legalMove {
-	background-color: rgb(91, 194, 69);
+  background-color: rgb(91, 194, 69);
 }
 .validTarget {
-	border: 3px solid rgb(91, 194, 69);
+  border: 3px solid rgb(91, 194, 69);
 }
 
 /*Scrap view overlaying field*/
 app-scrap-view {
-	position: absolute;
-	display: block;
-	height: 100%;
-	width: 100%;
-	background-color: #FFF;
-	z-index: 3;
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  z-index: 3;
+}
+app-discard-view {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  z-index: 3;
 }
 
 app-deck-view {
-	position: absolute;
-	display: block;
-	height: 100%;
-	width: 50%;
-	margin-left: 50%;
-	background-color: #FFF;
-	z-index: 3;
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 50%;
+  margin-left: 50%;
+  background-color: #fff;
+  z-index: 3;
 }
 
 #revealedDeck {
-	display: block;
-	top: 120%;
+  display: block;
+  top: 120%;
 }
 
 .revealedDeckCard {
-	display: inline-block;
-	position: relative;
-	height: 160px;
+  display: inline-block;
+  position: relative;
+  height: 160px;
 }
 
-
 /* Landscape */
-@media only screen
-and (min-device-width: 320px)
-and (max-device-width: 812px)
-/* and (-webkit-min-device-pixel-ratio: 2) */
-and (orientation: landscape) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 812px) /* and (-webkit-min-device-pixel-ratio: 2) */ and (orientation: landscape) {
   .flex-all {
     display: flex;
     flex-direction: row;
@@ -173,7 +174,8 @@ and (orientation: landscape) {
     max-height: 24px;
   }
 
-  #botHand, #yourHand {
+  #botHand,
+  #yourHand {
     display: flex;
     justify-content: center;
     width: 80%;
@@ -185,7 +187,6 @@ and (orientation: landscape) {
     font-size: 2em;
   }
 
-
   #deck {
     height: 20%;
   }
@@ -194,8 +195,6 @@ and (orientation: landscape) {
     height: 20%;
     margin-top: 10%;
   }
-
-
 
   #field {
     position: relative;
@@ -206,7 +205,6 @@ and (orientation: landscape) {
     max-height: 150px;
   }
 
-
   .field {
     position: relative;
   }
@@ -214,7 +212,6 @@ and (orientation: landscape) {
     display: inline-block;
     position: relative;
     min-height: 90px;
-
   }
   #yourField {
     min-height: 75px;
@@ -257,7 +254,7 @@ and (orientation: landscape) {
     display: block;
     height: 100%;
     width: 100%;
-    background-color: #FFF;
+    background-color: #fff;
     z-index: 3;
   }
 
@@ -267,7 +264,7 @@ and (orientation: landscape) {
     height: 100%;
     width: 50%;
     margin-left: 50%;
-    background-color: #FFF;
+    background-color: #fff;
     z-index: 3;
   }
 
@@ -287,7 +284,6 @@ and (orientation: landscape) {
   #indicator {
     font-size: 12px;
   }
-
 
   #toggle {
     display: none;
