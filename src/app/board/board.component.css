@@ -82,6 +82,7 @@
 
 .yourPointCard {
 	display: inline-block;
+  margin-right: 16px;
 }
 .pointCardImg {
 	display: inline-block;
@@ -91,7 +92,7 @@
 .jack {
 	height: 160px;
 	position: relative;
-	margin-left: -48px;
+	margin-left: -56px;
 	margin-right: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.06);
 }
