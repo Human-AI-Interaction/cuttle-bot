@@ -54,7 +54,7 @@ export class HandComponent implements OnInit {
 				"2": "On Turn: Destroy any non-point card. On Opponent’s Turn: Cancels the action of a card your opponent plays; cannot be used on Point Cards.",
 				"3": "Look through the Scrap Pile and pick a card to add to your hand. You must show your opponent the card.",
 				"4": "Make your opponent discard two cards of their choosing. If your opponent only has one card, you can still use a 4 on them.",
-				"5": "Draw two cards.",
+				"5": "Discard one card, and draw up to three.",
 				"6": "Destroy all Face Cards in play.",
 				"7": "Reveal the top two cards of the deck and choose one to play. The other card is put back on top of the deck.",
 				"8": "(Not available) Place an 8 sideways and choose one opponent. The opponent must reveal their hand to you whenever you ask. The 8 is considered a Face Card when played in this fashion.",

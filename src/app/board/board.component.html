@@ -1,55 +1,110 @@
-<img id="undo" src="assets/back-arrow.png" (click)="undo()">
+<img id="undo" src="assets/back-arrow.png" (click)="undo()" />
 
 <div class="flex-all">
-	<div id="side">
-		<img src="assets/deck.png" id="deck" (click)="draw()">
-		<img src="assets/scrap.png" id="scrap" (click)="untargetedOneOff()" [ngClass]="{'validTarget': gs.selected &&  [1, 3, 4, 5, 6, 7].indexOf(gs.selected.rank) > -1}">
-	</div>
+  <div id="side">
+    <img src="assets/deck.png" id="deck" (click)="draw()" />
+    <img
+      src="assets/scrap.png"
+      id="scrap"
+      (click)="untargetedOneOff()"
+      [ngClass]="{
+        validTarget:
+          gs.selected && [1, 3, 4, 5, 6, 7].indexOf(gs.selected.rank) > -1
+      }"
+    />
+  </div>
 
-	<div class="flex-container">
+  <div class="flex-container">
+    <!-- <div class="flex-container flex1"> -->
+    <app-hand
+      id="botHand"
+      [player]="game.players[0]"
+      [ngClass]="{ legalMove: gs.selected && gs.selected.rank == 8 }"
+      (click)="playGlasses()"
+    ></app-hand>
+    <!-- </div> -->
 
-		<!-- <div class="flex-container flex1"> -->
-		<app-hand id="botHand" [player]="game.players[0]" [ngClass]="{'legalMove': gs.selected && gs.selected.rank == 8}" (click)="playGlasses()"></app-hand>
-		<!-- </div> -->
+    <div id="field">
+      <app-scrap-view *ngIf="gs.chooseScrap"></app-scrap-view>
+      <app-discard-view *ngIf="gs.chooseDiscard"></app-discard-view>
+      <app-deck-view *ngIf="gs.chooseDeck"></app-deck-view>
+      <div id="botField" class="field">
+        <div id="botPoints" class="fieldArea">
+          <div
+            *ngFor="let card of game.bot.points; index as index"
+            class="yourPointCard"
+          >
+            <img
+              src="assets/cards/{{ card.img }}"
+              [ngClass]="{
+                validTarget: gameService.validTargets.indexOf(card) > -1
+              }"
+              (click)="targetPoint(card, index)"
+              class="pointCardImg"
+            />
+            <img
+              *ngFor="let jack of card.jacks; index as jackIndex"
+              src="assets/cards/{{ jack.img }}"
+              class="jack"
+              [ngClass]="{
+                validTarget: gameService.validTargets.indexOf(jack) > -1
+              }"
+              (click)="targetedOneOffJack(card, index)"
+            />
+          </div>
+        </div>
+        <div id="botFaceCards" class="fieldArea">
+          <img
+            *ngFor="let card of game.bot.faceCards"
+            src="assets/cards/{{ card.img }}"
+            class="pointCardImg"
+            [ngClass]="{
+              validTarget: gameService.validTargets.indexOf(card) > -1
+            }"
+            (click)="targetedOneOffFaces(card, index)"
+          />
+        </div>
+      </div>
 
-
-		<div id="field">
-			<app-scrap-view *ngIf="gs.chooseScrap"></app-scrap-view>
-			<app-deck-view *ngIf="gs.chooseDeck"></app-deck-view>
-			<div id="botField" class="field">
-				<div id="botPoints" class="fieldArea">
-					<div *ngFor="let card of game.bot.points index as index" class="yourPointCard">
-						<img src="assets/cards/{{card.img}}" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}"
-						 (click)="targetPoint(card, index)" class="pointCardImg">
-						<img *ngFor="let jack of card.jacks index as jackIndex" src="assets/cards/{{jack.img}}" class="jack" [ngClass]="{'validTarget': gameService.validTargets.indexOf(jack) > -1}" (click)="targetedOneOffJack(card, index)">
-					</div>
-				</div>
-				<div id="botFaceCards" class="fieldArea">
-					<img *ngFor="let card of game.bot.faceCards" src="assets/cards/{{card.img}}" class="pointCardImg" [ngClass]="{'validTarget': gameService.validTargets.indexOf(card) > -1}" (click)="targetedOneOffFaces(card, index)">
-				</div>
-			</div>
-
-			<div id="yourField" class="field" [ngClass]="{'legalMove': gs.legalMoves.indexOf('field') > -1}" (click)='playToField()'>
-				<div id="yourPoints" class="fieldArea">
-
-					<div *ngFor="let card of game.player.points" class="yourPointCard">
-						<img src="assets/cards/{{card.img}}" class="pointCardImg">
-						<img *ngFor="let jack of card.jacks" src="assets/cards/{{jack.img}}" class="jack">
-					</div>
-				</div>
-				<div id="yourPointsFace" class="fieldArea">
-					<img *ngFor="let card of game.player.faceCards" src="assets/cards/{{card.faceImg}}" class="pointCardImg">
-				</div>
-			</div>
-		</div>
-		<app-hand id="yourHand" [player]="game.players[1]"></app-hand>
-		<div id="indicator">Victory requirements: {{game.player.remainingPointsNeededToWin}} points</div>
-    <div *ngIf="NODE_ENV === 'development'">
-		  <button id="toggle" (click)="showDeck = !showDeck">Toggle Deck</button>
-		  <div *ngIf="showDeck" id="revealedDeck">
-			  <img *ngFor="let card of game.deck index as index" src="assets/cards/{{card.img}}" class="revealedDeckCard" (click)="stackDeck(index)">
-		  </div>
+      <div
+        id="yourField"
+        class="field"
+        [ngClass]="{ legalMove: gs.legalMoves.indexOf('field') > -1 }"
+        (click)="playToField()"
+      >
+        <div id="yourPoints" class="fieldArea">
+          <div *ngFor="let card of game.player.points" class="yourPointCard">
+            <img src="assets/cards/{{ card.img }}" class="pointCardImg" />
+            <img
+              *ngFor="let jack of card.jacks"
+              src="assets/cards/{{ jack.img }}"
+              class="jack"
+            />
+          </div>
+        </div>
+        <div id="yourPointsFace" class="fieldArea">
+          <img
+            *ngFor="let card of game.player.faceCards"
+            src="assets/cards/{{ card.faceImg }}"
+            class="pointCardImg"
+          />
+        </div>
+      </div>
     </div>
-	</div>
-
+    <app-hand id="yourHand" [player]="game.players[1]"></app-hand>
+    <div id="indicator">
+      Victory requirements: {{ game.player.remainingPointsNeededToWin }} points
+    </div>
+    <div *ngIf="NODE_ENV === 'development'">
+      <button id="toggle" (click)="showDeck = !showDeck">Toggle Deck</button>
+      <div *ngIf="showDeck" id="revealedDeck">
+        <img
+          *ngFor="let card of game.deck; index as index"
+          src="assets/cards/{{ card.img }}"
+          class="revealedDeckCard"
+          (click)="stackDeck(index)"
+        />
+      </div>
+    </div>
+  </div>
 </div>

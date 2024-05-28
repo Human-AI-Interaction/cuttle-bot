@@ -6,6 +6,7 @@ import { BoardComponent } from './board/board.component';
 import { HandComponent } from './hand/hand.component';
 import { ScrapViewComponent } from './scrap-view/scrap-view.component';
 import { DeckViewComponent } from './deck-view/deck-view.component';
+import { DiscardViewComponent } from './discard-view/discard-view.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,9 @@ import { DeckViewComponent } from './deck-view/deck-view.component';
     BoardComponent,
     HandComponent,
     ScrapViewComponent,
-    DeckViewComponent
+    DeckViewComponent,
+    DiscardViewComponent,
+
   ],
   imports: [
     BrowserModule
