@@ -82,17 +82,19 @@
 
 .yourPointCard {
 	display: inline-block;
+  margin-right: 16px;
 }
 .pointCardImg {
 	display: inline-block;
-	max-height: 180px;
+	height: 160px;
 }
 
 .jack {
-	max-height: 180px;
+	height: 160px;
 	position: relative;
-	margin-left: -90px;
-	margin-right: 10px;
+	margin-left: -56px;
+	margin-right: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .legalMove {
@@ -234,14 +236,14 @@ and (orientation: landscape) {
   }
   .pointCardImg {
     display: inline-block;
-    max-height: 75px;
+    height: 75px;
   }
 
   .jack {
-    max-height: 75px;
+    height: 75px;
     position: relative;
-    margin-left: -40px;
-    margin-right: 10px;
+    margin-left: -32px;
+    margin-right: 8px;
   }
 
   .legalMove {
