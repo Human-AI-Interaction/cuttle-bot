@@ -11,16 +11,16 @@ export class Card {
 		if (this.rank == 8) {
 			switch(this.suit) {
 				case 0:
-					return 'glasses-clubs.png';
+					return 'glasses-clubs.svg';
 				case 1:
-					return 'glasses-diamonds.png';
+					return 'glasses-diamonds.svg';
 				case 2:
-					return 'glasses-hearts.png';
+					return 'glasses-hearts.svg';
 				case 3:
-					return 'glasses-spades.png';
+					return 'glasses-spades.svg';
 			}
 		} else {
-			return `card_${this.suit}_${this.rank}.png`;		
+			return `card-${this.suit}-${this.rank}.svg`;		
 		}
 	}
 
