@@ -85,14 +85,14 @@
 }
 .pointCardImg {
 	display: inline-block;
-	max-height: 180px;
+	height: 160px;
 }
 
 .jack {
-	max-height: 180px;
+	height: 160px;
 	position: relative;
-	margin-left: -90px;
-	margin-right: 10px;
+	margin-left: -48px;
+	margin-right: 8px;
 }
 
 .legalMove {
@@ -234,14 +234,14 @@ and (orientation: landscape) {
   }
   .pointCardImg {
     display: inline-block;
-    max-height: 75px;
+    height: 75px;
   }
 
   .jack {
-    max-height: 75px;
+    height: 75px;
     position: relative;
-    margin-left: -40px;
-    margin-right: 10px;
+    margin-left: -32px;
+    margin-right: 8px;
   }
 
   .legalMove {
