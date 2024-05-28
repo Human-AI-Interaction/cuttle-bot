@@ -4,23 +4,23 @@ export class Card {
 	jacks: Card[];
 
 	get img(): string {
-		return `card_${this.suit}_${this.rank}.png`;
+		return `card-${this.suit}-${this.rank}.svg`;
 	}
 
 	get faceImg(): string {
 		if (this.rank == 8) {
 			switch(this.suit) {
 				case 0:
-					return 'Glasses_Clubs.jpg';
+					return 'glasses-clubs.svg';
 				case 1:
-					return 'Glasses_Diamonds.jpg';
+					return 'glasses-diamonds.svg';
 				case 2:
-					return 'Glasses_Hearts.jpg';
+					return 'glasses-hearts.svg';
 				case 3:
-					return 'Glasses_Spades.jpg';
+					return 'glasses-spades.svg';
 			}
 		} else {
-			return `card_${this.suit}_${this.rank}.png`;		
+			return `card-${this.suit}-${this.rank}.svg`;		
 		}
 	}
 
