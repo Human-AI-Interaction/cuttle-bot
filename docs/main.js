@@ -98,12 +98,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hand_hand_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hand/hand.component */ "./src/app/hand/hand.component.ts");
 /* harmony import */ var _scrap_view_scrap_view_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scrap-view/scrap-view.component */ "./src/app/scrap-view/scrap-view.component.ts");
 /* harmony import */ var _deck_view_deck_view_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./deck-view/deck-view.component */ "./src/app/deck-view/deck-view.component.ts");
+/* harmony import */ var _discard_view_discard_view_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./discard-view/discard-view.component */ "./src/app/discard-view/discard-view.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -121,7 +123,8 @@ var AppModule = /** @class */ (function () {
                 _board_board_component__WEBPACK_IMPORTED_MODULE_3__["BoardComponent"],
                 _hand_hand_component__WEBPACK_IMPORTED_MODULE_4__["HandComponent"],
                 _scrap_view_scrap_view_component__WEBPACK_IMPORTED_MODULE_5__["ScrapViewComponent"],
-                _deck_view_deck_view_component__WEBPACK_IMPORTED_MODULE_6__["DeckViewComponent"]
+                _deck_view_deck_view_component__WEBPACK_IMPORTED_MODULE_6__["DeckViewComponent"],
+                _discard_view_discard_view_component__WEBPACK_IMPORTED_MODULE_7__["DiscardViewComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]
@@ -144,7 +147,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".flex-all {\n\tdisplay: flex;\n\tflex-direction: row;\n  justify-content: center;\n  margin: 0 auto;\n}\n\n.flex-container {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n  width: 100%;\n  margin-right: 5%;\n}\n\n#side {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n  margin: 220px 2%;\n  width:15%;\n  min-width: 125px;\n}\n\n#undo {\n\tdisplay: inline-block;\n\theight: 8%;\n  max-height: 64px;\n}\n\n#botHand, #yourHand {\n\tdisplay: flex;\n\tjustify-content: center;\n\twidth: 80%;\n}\n\n#indicator {\n\tfont-family: Arial, Helvetica, sans-serif;\n\tfont-size: 2em;\n}\n\n#deck {\n\theight: 160px;\n}\n\n#scrap {\n\theight: 160px;\n\tmargin-top: 10%;\n}\n\n#field {\n\tposition: relative;\n\tjustify-content: center;\n\tborder: 2px solid black;\n\twidth: 100%;\n\tmin-height: 360px;\n\tmax-height: 600px;\n}\n\n.field {\n\tposition: relative;\n}\n\n.fieldArea {\n\tdisplay: inline-block;\n\tposition: relative;\n\tmin-height: 180px;\n\n}\n\n#yourField {\n  min-height: 180px;\n  height: 180px;\n  display: flex;\n  flex-direction: row;\n}\n\n#botField {\n\tmin-height: 180px;\n\tdisplay: flex;\n\tflex-direction: row;\n}\n\n.yourPointCard {\n\tdisplay: inline-block;\n  margin-right: 16px;\n}\n\n.pointCardImg {\n\tdisplay: inline-block;\n\theight: 160px;\n}\n\n.jack {\n\theight: 160px;\n\tposition: relative;\n\tmargin-left: -56px;\n\tmargin-right: 8px;\n  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.06);\n}\n\n.legalMove {\n\tbackground-color: rgb(91, 194, 69);\n}\n\n.validTarget {\n\tborder: 3px solid rgb(91, 194, 69);\n}\n\n/*Scrap view overlaying field*/\n\napp-scrap-view {\n\tposition: absolute;\n\tdisplay: block;\n\theight: 100%;\n\twidth: 100%;\n\tbackground-color: #FFF;\n\tz-index: 3;\n}\n\napp-deck-view {\n\tposition: absolute;\n\tdisplay: block;\n\theight: 100%;\n\twidth: 50%;\n\tmargin-left: 50%;\n\tbackground-color: #FFF;\n\tz-index: 3;\n}\n\n#revealedDeck {\n\tdisplay: block;\n\ttop: 120%;\n}\n\n.revealedDeckCard {\n\tdisplay: inline-block;\n\tposition: relative;\n\theight: 160px;\n}\n\n/* Landscape */\n\n@media only screen\nand (min-device-width: 320px)\nand (max-device-width: 812px)\n/* and (-webkit-min-device-pixel-ratio: 2) */\nand (orientation: landscape) {\n  .flex-all {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    margin: 0 auto;\n  }\n\n  .flex-container {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    width: 100%;\n    margin-right: 5%;\n  }\n\n  #side {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    height: 65vh;\n    margin: 15% 2% 0 0;\n    width: 10%;\n    max-width: 75px;\n    min-width: 50px;\n  }\n\n  #undo {\n    display: inline-block;\n    position: absolute;\n    height: 8%;\n    max-height: 24px;\n  }\n\n  #botHand, #yourHand {\n    display: flex;\n    justify-content: center;\n    width: 80%;\n    margin-right: 5%;\n  }\n\n  #indicator {\n    font-family: Arial, Helvetica, sans-serif;\n    font-size: 2em;\n  }\n\n\n  #deck {\n    height: 20%;\n  }\n\n  #scrap {\n    height: 20%;\n    margin-top: 10%;\n  }\n\n\n\n  #field {\n    position: relative;\n    justify-content: center;\n    border: 2px solid black;\n    width: 100%;\n    min-height: 140px;\n    max-height: 150px;\n  }\n\n\n  .field {\n    position: relative;\n  }\n  .fieldArea {\n    display: inline-block;\n    position: relative;\n    min-height: 90px;\n\n  }\n  #yourField {\n    min-height: 75px;\n    height: 75px;\n    display: flex;\n    flex-direction: row;\n  }\n  #botField {\n    min-height: 75px;\n    height: 75px;\n    display: flex;\n    flex-direction: row;\n  }\n\n  .yourPointCard {\n    display: inline-block;\n  }\n  .pointCardImg {\n    display: inline-block;\n    height: 75px;\n  }\n\n  .jack {\n    height: 75px;\n    position: relative;\n    margin-left: -32px;\n    margin-right: 8px;\n  }\n\n  .legalMove {\n    background-color: rgb(91, 194, 69);\n  }\n  .validTarget {\n    border: 3px solid rgb(91, 194, 69);\n  }\n\n  /*Scrap view overlaying field*/\n  app-scrap-view {\n    position: absolute;\n    display: block;\n    height: 100%;\n    width: 100%;\n    background-color: #FFF;\n    z-index: 3;\n  }\n\n  app-deck-view {\n    position: absolute;\n    display: block;\n    height: 100%;\n    width: 50%;\n    margin-left: 50%;\n    background-color: #FFF;\n    z-index: 3;\n  }\n\n  #revealedDeck {\n    display: block;\n    position: absolute;\n    height: 100%;\n    top: 120%;\n  }\n\n  .revealedDeckCard {\n    display: inline-block;\n    position: relative;\n    height: 10%;\n  }\n\n  #indicator {\n    font-size: 12px;\n  }\n\n\n  #toggle {\n    display: none;\n  }\n}\n"
+module.exports = ".flex-all {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  margin: 0 auto;\n}\n\n.flex-container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  width: 100%;\n  margin-right: 5%;\n}\n\n#side {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin: 220px 2%;\n  width: 15%;\n  min-width: 125px;\n}\n\n#undo {\n  display: inline-block;\n  height: 8%;\n  max-height: 64px;\n}\n\n#botHand,\n#yourHand {\n  display: flex;\n  justify-content: center;\n  width: 80%;\n}\n\n#indicator {\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 2em;\n}\n\n#deck {\n  height: 160px;\n}\n\n#scrap {\n  height: 160px;\n  margin-top: 10%;\n}\n\n#field {\n  position: relative;\n  justify-content: center;\n  border: 2px solid black;\n  width: 100%;\n  min-height: 360px;\n  max-height: 600px;\n}\n\n.field {\n  position: relative;\n}\n\n.fieldArea {\n  display: inline-block;\n  position: relative;\n  min-height: 180px;\n}\n\n#yourField {\n  min-height: 180px;\n  height: 180px;\n  display: flex;\n  flex-direction: row;\n}\n\n#botField {\n  min-height: 180px;\n  display: flex;\n  flex-direction: row;\n}\n\n.yourPointCard {\n\tdisplay: inline-block;\n  margin-right: 16px;\n}\n\n.pointCardImg {\n\tdisplay: inline-block;\n\theight: 160px;\n}\n\n.jack {\n\theight: 160px;\n\tposition: relative;\n\tmargin-left: -56px;\n\tmargin-right: 8px;\n  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.06);\n}\n\n.legalMove {\n  background-color: rgb(91, 194, 69);\n}\n\n.validTarget {\n  border: 3px solid rgb(91, 194, 69);\n}\n\n/*Scrap view overlaying field*/\n\napp-scrap-view {\n  position: absolute;\n  display: block;\n  height: 100%;\n  width: 100%;\n  background-color: #fff;\n  z-index: 3;\n}\n\napp-discard-view {\n  position: absolute;\n  display: block;\n  height: 100%;\n  width: 100%;\n  background-color: #fff;\n  z-index: 3;\n}\n\napp-deck-view {\n  position: absolute;\n  display: block;\n  height: 100%;\n  width: 50%;\n  margin-left: 50%;\n  background-color: #fff;\n  z-index: 3;\n}\n\n#revealedDeck {\n  display: block;\n  top: 120%;\n}\n\n.revealedDeckCard {\n  display: inline-block;\n  position: relative;\n  height: 160px;\n}\n\n/* Landscape */\n\n@media only screen and (min-device-width: 320px) and (max-device-width: 812px) /* and (-webkit-min-device-pixel-ratio: 2) */ and (orientation: landscape) {\n  .flex-all {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    margin: 0 auto;\n  }\n\n  .flex-container {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    width: 100%;\n    margin-right: 5%;\n  }\n\n  #side {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    height: 65vh;\n    margin: 15% 2% 0 0;\n    width: 10%;\n    max-width: 75px;\n    min-width: 50px;\n  }\n\n  #undo {\n    display: inline-block;\n    position: absolute;\n    height: 8%;\n    max-height: 24px;\n  }\n\n  #botHand,\n  #yourHand {\n    display: flex;\n    justify-content: center;\n    width: 80%;\n    margin-right: 5%;\n  }\n\n  #indicator {\n    font-family: Arial, Helvetica, sans-serif;\n    font-size: 2em;\n  }\n\n  #deck {\n    height: 20%;\n  }\n\n  #scrap {\n    height: 20%;\n    margin-top: 10%;\n  }\n\n  #field {\n    position: relative;\n    justify-content: center;\n    border: 2px solid black;\n    width: 100%;\n    min-height: 140px;\n    max-height: 150px;\n  }\n\n  .field {\n    position: relative;\n  }\n  .fieldArea {\n    display: inline-block;\n    position: relative;\n    min-height: 90px;\n  }\n  #yourField {\n    min-height: 75px;\n    height: 75px;\n    display: flex;\n    flex-direction: row;\n  }\n  #botField {\n    min-height: 75px;\n    height: 75px;\n    display: flex;\n    flex-direction: row;\n  }\n\n  .yourPointCard {\n    display: inline-block;\n  }\n  .pointCardImg {\n    display: inline-block;\n    height: 75px;\n  }\n\n  .jack {\n    height: 75px;\n    position: relative;\n    margin-left: -32px;\n    margin-right: 8px;\n  }\n\n  .legalMove {\n    background-color: rgb(91, 194, 69);\n  }\n  .validTarget {\n    border: 3px solid rgb(91, 194, 69);\n  }\n\n  /*Scrap view overlaying field*/\n  app-scrap-view {\n    position: absolute;\n    display: block;\n    height: 100%;\n    width: 100%;\n    background-color: #fff;\n    z-index: 3;\n  }\n\n  app-deck-view {\n    position: absolute;\n    display: block;\n    height: 100%;\n    width: 50%;\n    margin-left: 50%;\n    background-color: #fff;\n    z-index: 3;\n  }\n\n  #revealedDeck {\n    display: block;\n    position: absolute;\n    height: 100%;\n    top: 120%;\n  }\n\n  .revealedDeckCard {\n    display: inline-block;\n    position: relative;\n    height: 10%;\n  }\n\n  #indicator {\n    font-size: 12px;\n  }\n\n  #toggle {\n    display: none;\n  }\n}\n"
 
 /***/ }),
 
@@ -155,7 +158,7 @@ module.exports = ".flex-all {\n\tdisplay: flex;\n\tflex-direction: row;\n  justi
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<img id=\"undo\" src=\"assets/back-arrow.png\" (click)=\"undo()\">\n\n<div class=\"flex-all\">\n\t<div id=\"side\">\n\t\t<img src=\"assets/deck.png\" id=\"deck\" (click)=\"draw()\">\n\t\t<img src=\"assets/scrap.png\" id=\"scrap\" (click)=\"untargetedOneOff()\" [ngClass]=\"{'validTarget': gs.selected &&  [1, 3, 4, 5, 6, 7].indexOf(gs.selected.rank) > -1}\">\n\t</div>\n\n\t<div class=\"flex-container\">\n\n\t\t<!-- <div class=\"flex-container flex1\"> -->\n\t\t<app-hand id=\"botHand\" [player]=\"game.players[0]\" [ngClass]=\"{'legalMove': gs.selected && gs.selected.rank == 8}\" (click)=\"playGlasses()\"></app-hand>\n\t\t<!-- </div> -->\n\n\n\t\t<div id=\"field\">\n\t\t\t<app-scrap-view *ngIf=\"gs.chooseScrap\"></app-scrap-view>\n\t\t\t<app-deck-view *ngIf=\"gs.chooseDeck\"></app-deck-view>\n\t\t\t<div id=\"botField\" class=\"field\">\n\t\t\t\t<div id=\"botPoints\" class=\"fieldArea\">\n\t\t\t\t\t<div *ngFor=\"let card of game.bot.points index as index\" class=\"yourPointCard\">\n\t\t\t\t\t\t<img src=\"assets/cards/{{card.img}}\" [ngClass]=\"{'validTarget': gameService.validTargets.indexOf(card) > -1}\"\n\t\t\t\t\t\t (click)=\"targetPoint(card, index)\" class=\"pointCardImg\">\n\t\t\t\t\t\t<img *ngFor=\"let jack of card.jacks index as jackIndex\" src=\"assets/cards/{{jack.img}}\" class=\"jack\" [ngClass]=\"{'validTarget': gameService.validTargets.indexOf(jack) > -1}\" (click)=\"targetedOneOffJack(card, index)\">\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"botFaceCards\" class=\"fieldArea\">\n\t\t\t\t\t<img *ngFor=\"let card of game.bot.faceCards\" src=\"assets/cards/{{card.img}}\" class=\"pointCardImg\" [ngClass]=\"{'validTarget': gameService.validTargets.indexOf(card) > -1}\" (click)=\"targetedOneOffFaces(card, index)\">\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div id=\"yourField\" class=\"field\" [ngClass]=\"{'legalMove': gs.legalMoves.indexOf('field') > -1}\" (click)='playToField()'>\n\t\t\t\t<div id=\"yourPoints\" class=\"fieldArea\">\n\n\t\t\t\t\t<div *ngFor=\"let card of game.player.points\" class=\"yourPointCard\">\n\t\t\t\t\t\t<img src=\"assets/cards/{{card.img}}\" class=\"pointCardImg\">\n\t\t\t\t\t\t<img *ngFor=\"let jack of card.jacks\" src=\"assets/cards/{{jack.img}}\" class=\"jack\">\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"yourPointsFace\" class=\"fieldArea\">\n\t\t\t\t\t<img *ngFor=\"let card of game.player.faceCards\" src=\"assets/cards/{{card.faceImg}}\" class=\"pointCardImg\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<app-hand id=\"yourHand\" [player]=\"game.players[1]\"></app-hand>\n\t\t<div id=\"indicator\">Victory requirements: {{game.player.remainingPointsNeededToWin}} points</div>\n    <div *ngIf=\"NODE_ENV === 'development'\">\n\t\t  <button id=\"toggle\" (click)=\"showDeck = !showDeck\">Toggle Deck</button>\n\t\t  <div *ngIf=\"showDeck\" id=\"revealedDeck\">\n\t\t\t  <img *ngFor=\"let card of game.deck index as index\" src=\"assets/cards/{{card.img}}\" class=\"revealedDeckCard\" (click)=\"stackDeck(index)\">\n\t\t  </div>\n    </div>\n\t</div>\n\n</div>\n"
+module.exports = "<img id=\"undo\" src=\"assets/back-arrow.png\" (click)=\"undo()\" />\n\n<div class=\"flex-all\">\n  <div id=\"side\">\n    <img src=\"assets/deck.png\" id=\"deck\" (click)=\"draw()\" />\n    <img\n      src=\"assets/scrap.png\"\n      id=\"scrap\"\n      (click)=\"untargetedOneOff()\"\n      [ngClass]=\"{\n        validTarget:\n          gs.selected && [1, 3, 4, 5, 6, 7].indexOf(gs.selected.rank) > -1\n      }\"\n    />\n  </div>\n\n  <div class=\"flex-container\">\n    <!-- <div class=\"flex-container flex1\"> -->\n    <app-hand\n      id=\"botHand\"\n      [player]=\"game.players[0]\"\n      [ngClass]=\"{ legalMove: gs.selected && gs.selected.rank == 8 }\"\n      (click)=\"playGlasses()\"\n    ></app-hand>\n    <!-- </div> -->\n\n    <div id=\"field\">\n      <app-scrap-view *ngIf=\"gs.chooseScrap\"></app-scrap-view>\n      <app-discard-view *ngIf=\"gs.chooseDiscard\"></app-discard-view>\n      <app-deck-view *ngIf=\"gs.chooseDeck\"></app-deck-view>\n      <div id=\"botField\" class=\"field\">\n        <div id=\"botPoints\" class=\"fieldArea\">\n          <div\n            *ngFor=\"let card of game.bot.points; index as index\"\n            class=\"yourPointCard\"\n          >\n            <img\n              src=\"assets/cards/{{ card.img }}\"\n              [ngClass]=\"{\n                validTarget: gameService.validTargets.indexOf(card) > -1\n              }\"\n              (click)=\"targetPoint(card, index)\"\n              class=\"pointCardImg\"\n            />\n            <img\n              *ngFor=\"let jack of card.jacks; index as jackIndex\"\n              src=\"assets/cards/{{ jack.img }}\"\n              class=\"jack\"\n              [ngClass]=\"{\n                validTarget: gameService.validTargets.indexOf(jack) > -1\n              }\"\n              (click)=\"targetedOneOffJack(card, index)\"\n            />\n          </div>\n        </div>\n        <div id=\"botFaceCards\" class=\"fieldArea\">\n          <img\n            *ngFor=\"let card of game.bot.faceCards\"\n            src=\"assets/cards/{{ card.img }}\"\n            class=\"pointCardImg\"\n            [ngClass]=\"{\n              validTarget: gameService.validTargets.indexOf(card) > -1\n            }\"\n            (click)=\"targetedOneOffFaces(card, index)\"\n          />\n        </div>\n      </div>\n\n      <div\n        id=\"yourField\"\n        class=\"field\"\n        [ngClass]=\"{ legalMove: gs.legalMoves.indexOf('field') > -1 }\"\n        (click)=\"playToField()\"\n      >\n        <div id=\"yourPoints\" class=\"fieldArea\">\n          <div *ngFor=\"let card of game.player.points\" class=\"yourPointCard\">\n            <img src=\"assets/cards/{{ card.img }}\" class=\"pointCardImg\" />\n            <img\n              *ngFor=\"let jack of card.jacks\"\n              src=\"assets/cards/{{ jack.img }}\"\n              class=\"jack\"\n            />\n          </div>\n        </div>\n        <div id=\"yourPointsFace\" class=\"fieldArea\">\n          <img\n            *ngFor=\"let card of game.player.faceCards\"\n            src=\"assets/cards/{{ card.faceImg }}\"\n            class=\"pointCardImg\"\n          />\n        </div>\n      </div>\n    </div>\n    <app-hand id=\"yourHand\" [player]=\"game.players[1]\"></app-hand>\n    <div id=\"indicator\">\n      Victory requirements: {{ game.player.remainingPointsNeededToWin }} points\n    </div>\n    <div *ngIf=\"NODE_ENV === 'development'\">\n      <button id=\"toggle\" (click)=\"showDeck = !showDeck\">Toggle Deck</button>\n      <div *ngIf=\"showDeck\" id=\"revealedDeck\">\n        <img\n          *ngFor=\"let card of game.deck; index as index\"\n          src=\"assets/cards/{{ card.img }}\"\n          class=\"revealedDeckCard\"\n          (click)=\"stackDeck(index)\"\n        />\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -391,11 +394,8 @@ var BoardComponent = /** @class */ (function () {
                     alert("Cuttle Bot discards the " + firstDiscard + " and the " + secondDiscard);
                     break;
                 case 5:
-                    // gameCopy.scrap.push(gameCopy.player.hand.splice(this.gameService.selIndex, 1)[0]);
-                    gameCopy.player.hand.push(gameCopy.deck.shift());
-                    if (gameCopy.player.hand.length < 8) {
-                        gameCopy.player.hand.push(gameCopy.deck.shift());
-                    }
+                    this.gs.chooseDiscard = true;
+                    done = false;
                     break;
                 case 6:
                     gameCopy.player.faceCards.forEach(function (faceCard) {
@@ -931,6 +931,99 @@ var DeckViewComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/discard-view/discard-view.component.css":
+/*!*********************************************************!*\
+  !*** ./src/app/discard-view/discard-view.component.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "h1 {\n  text-align: center;\n}\nimg {\n  display: inline-block;\n  position: relative;\n  height: 40%;\n  margin-top: 3%;\n  margin-left: 1%;\n}\n"
+
+/***/ }),
+
+/***/ "./src/app/discard-view/discard-view.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/discard-view/discard-view.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Choose a card to discard</h1>\n<img\n  *ngFor=\"let card of gameService.game.player.hand; index as index\"\n  src=\"assets/cards/{{ card.img }}\"\n  (click)=\"discardAndDraw(index)\"\n/>\n<button\n  *ngIf=\"!gameService.game.player.hand.length\"\n  (click)=\"discardAndDraw(index)\"\n>\n  Draw\n</button>\n"
+
+/***/ }),
+
+/***/ "./src/app/discard-view/discard-view.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/discard-view/discard-view.component.ts ***!
+  \********************************************************/
+/*! exports provided: DiscardViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiscardViewComponent", function() { return DiscardViewComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _game_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../game.service */ "./src/app/game.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DiscardViewComponent = /** @class */ (function () {
+    function DiscardViewComponent(gameService) {
+        this.gameService = gameService;
+    }
+    Object.defineProperty(DiscardViewComponent.prototype, "game", {
+        get: function () {
+            return this.gameService.game;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DiscardViewComponent.prototype.discardAndDraw = function (index) {
+        var gameCopy = this.gameService.gameCopy.copy();
+        var oldGame = this.gameService.oldGameCopy.copy();
+        var newCards = 0;
+        gameCopy.scrap.push(gameCopy.oneOff);
+        if (index) {
+            gameCopy.scrap.push(gameCopy.players[1].hand[index]);
+            gameCopy.players[1].hand.splice([index], 1);
+        }
+        gameCopy.oneOff = null;
+        while (newCards < 3 && gameCopy.players[0].hand.length < 8) {
+            gameCopy.players[1].hand.push(gameCopy.deck.shift());
+            newCards++;
+        }
+        gameCopy = this.gameService.botBrain.decideLegalMoves(gameCopy);
+        // Add change to history and update game
+        this.gameService.update(oldGame, gameCopy);
+        this.gameService.selected = null;
+        this.gameService.selIndex = null;
+        this.gameService.chooseDiscard = false;
+    };
+    DiscardViewComponent.prototype.ngOnInit = function () { };
+    DiscardViewComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-discard-view',
+            template: __webpack_require__(/*! ./discard-view.component.html */ "./src/app/discard-view/discard-view.component.html"),
+            styles: [__webpack_require__(/*! ./discard-view.component.css */ "./src/app/discard-view/discard-view.component.css")]
+        }),
+        __metadata("design:paramtypes", [_game_service__WEBPACK_IMPORTED_MODULE_1__["GameService"]])
+    ], DiscardViewComponent);
+    return DiscardViewComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/game.service.ts":
 /*!*********************************!*\
   !*** ./src/app/game.service.ts ***!
@@ -965,6 +1058,7 @@ var GameService = /** @class */ (function () {
         this.selected = null;
         this.botBrain = new _bot__WEBPACK_IMPORTED_MODULE_1__["Bot"]();
         this.chooseScrap = false;
+        this.chooseDiscard = false;
         this.chooseDeck = false;
     }
     Object.defineProperty(GameService.prototype, "legalMoves", {
@@ -1281,7 +1375,7 @@ var HandComponent = /** @class */ (function () {
             "2": "On Turn: Destroy any non-point card. On Opponent’s Turn: Cancels the action of a card your opponent plays; cannot be used on Point Cards.",
             "3": "Look through the Scrap Pile and pick a card to add to your hand. You must show your opponent the card.",
             "4": "Make your opponent discard two cards of their choosing. If your opponent only has one card, you can still use a 4 on them.",
-            "5": "Draw two cards.",
+            "5": "Discard one card, and draw up to three.",
             "6": "Destroy all Face Cards in play.",
             "7": "Reveal the top two cards of the deck and choose one to play. The other card is put back on top of the deck.",
             "8": "(Not available) Place an 8 sideways and choose one opponent. The opponent must reveal their hand to you whenever you ask. The 8 is considered a Face Card when played in this fashion.",

@@ -1,0 +1,10 @@
+h1 {
+  text-align: center;
+}
+img {
+  display: inline-block;
+  position: relative;
+  height: 40%;
+  margin-top: 3%;
+  margin-left: 1%;
+}
